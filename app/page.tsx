@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
 import { ChevronDown, Github, Linkedin, Mail, Moon, Star } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
@@ -177,10 +178,11 @@ export default function Portfolio() {
           {[1, 2, 3].map((project) => (
             <Card key={project} className="bg-slate-900/60 border-purple-900/50 backdrop-blur-sm overflow-hidden">
               <div className="h-48 bg-gradient-to-br from-indigo-800/20 to-purple-800/20 flex items-center justify-center">
-                <img
+                <Image
                   src={`/placeholder.svg?height=200&width=400`}
                   alt={`Project ${project}`}
                   className="object-cover"
+                  layout="fill"
                 />
               </div>
               <CardHeader>
