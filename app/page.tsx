@@ -135,13 +135,13 @@ export default function Portfolio() {
         <div className="grid md:grid-cols-2 gap-10 items-center">
           <div className="space-y-4">
             <p className="text-gray-300">
-              Hello! I'm a passionate developer with a love for creating beautiful, functional websites and
-              applications. Just like the vast universe, my curiosity is endless, and I'm always exploring new
+              Hello! I&apos;m a passionate developer with a love for creating beautiful, functional websites and
+              applications. Just like the vast universe, my curiosity is endless, and I&apos;m always exploring new
               technologies and approaches.
             </p>
             <p className="text-gray-300">
               With experience in frontend and backend development, I craft digital experiences that are both visually
-              stunning and technically sound. When I'm not coding, you might find me stargazing or reading about the
+              stunning and technically sound. When I&apos;m not coding, you might find me stargazing or reading about the
               latest advancements in space exploration.
             </p>
           </div>
@@ -233,7 +233,7 @@ export default function Portfolio() {
         <div className="grid md:grid-cols-2 gap-10">
           <div className="space-y-4">
             <p className="text-gray-300">
-              Interested in working together? Feel free to reach out to me through any of the channels below. I'm always
+              Interested in working together? Feel free to reach out to me through any of the channels below. I&apos;m always
               open to discussing new projects, creative ideas, or opportunities to be part of your vision.
             </p>
             <div className="flex items-center gap-3 text-gray-300">
