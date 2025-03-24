@@ -13,6 +13,15 @@ export default function Portfolio() {
   const [text, setText] = useState("")
   const [fullText] = useState("Tushin Kulshreshtha") // Replace with your name
   const [index, setIndex] = useState(0)
+  const [stars] = useState(() =>
+    [...Array(100)].map(() => ({
+      width: Math.random() * 3 + 1 + "px",
+      height: Math.random() * 3 + 1 + "px",
+      top: Math.random() * 100 + "%",
+      left: Math.random() * 100 + "%",
+      duration: Math.random() * 5 + 3,
+    }))
+  )
 
   // Typewriter effect
   useEffect(() => {
@@ -30,21 +39,21 @@ export default function Portfolio() {
     <div className="relative min-h-screen bg-gradient-to-b from-black via-slate-900 to-indigo-950 text-white overflow-hidden">
       {/* Stars background */}
       <div className="absolute inset-0 z-0">
-        {[...Array(100)].map((_, i) => (
+        {stars.map((star, i) => (
           <motion.div
             key={i}
             className="absolute rounded-full bg-white"
             style={{
-              width: Math.random() * 3 + 1 + "px",
-              height: Math.random() * 3 + 1 + "px",
-              top: Math.random() * 100 + "%",
-              left: Math.random() * 100 + "%",
+              width: star.width,
+              height: star.height,
+              top: star.top,
+              left: star.left,
             }}
             animate={{
               opacity: [0.2, 0.8, 0.2],
             }}
             transition={{
-              duration: Math.random() * 5 + 3,
+              duration: star.duration,
               repeat: Number.POSITIVE_INFINITY,
               ease: "easeInOut",
             }}
