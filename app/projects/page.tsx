@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Link from "next/link"
+import Image from "next/image"
 import { ArrowLeft, ExternalLink, Filter, Github, Layers, Moon, Search, Star, Tag } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
@@ -155,11 +156,14 @@ export default function ProjectsPage() {
                   onClick={() => openProjectModal(project)}
                 >
                   <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-60 z-10"></div>
-                  <img
-                    src={project.image || "/placeholder.svg"}
-                    alt={project.name}
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
+                  <div className="relative aspect-video overflow-hidden rounded-lg">
+                    <Image
+                      src={project.image || "/placeholder.svg"}
+                      alt={project.name}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                  </div>
                   <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
                     <Badge className="mb-2 bg-purple-600 hover:bg-purple-700">{project.language || 'Other'}</Badge>
                     <h3 className="text-xl font-bold mb-2 text-white">{project.name}</h3>
@@ -367,11 +371,14 @@ export default function ProjectsPage() {
                       onClick={() => openProjectModal(project)}
                     >
                       <div className="h-48 overflow-hidden">
-                        <img
-                          src={project.image || "/placeholder.svg"}
-                          alt={project.name}
-                          className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-                        />
+                        <div className="relative aspect-video overflow-hidden rounded-lg">
+                          <Image
+                            src={project.image || "/placeholder.svg"}
+                            alt={project.name}
+                            fill
+                            className="object-cover"
+                          />
+                        </div>
                       </div>
                       <div className="p-6">
                         <div className="flex justify-between items-start mb-2">
@@ -446,11 +453,14 @@ export default function ProjectsPage() {
                     >
                       <div className="flex flex-col md:flex-row">
                         <div className="md:w-1/4 h-48 md:h-auto">
-                          <img
-                            src={project.image || "/placeholder.svg"}
-                            alt={project.name}
-                            className="w-full h-full object-cover"
-                          />
+                          <div className="relative aspect-video overflow-hidden rounded-lg">
+                            <Image
+                              src={project.image || "/placeholder.svg"}
+                              alt={project.name}
+                              fill
+                              className="object-cover"
+                            />
+                          </div>
                         </div>
                         <div className="p-6 md:w-3/4">
                           <div className="flex flex-wrap justify-between items-center mb-2 gap-2">
@@ -579,11 +589,14 @@ export default function ProjectsPage() {
               </DialogHeader>
               <div className="space-y-6">
                 <div className="rounded-lg overflow-hidden h-[300px]">
-                  <img
-                    src={selectedProject.image || "/placeholder.svg"}
-                    alt={selectedProject.name}
-                    className="w-full h-full object-cover"
-                  />
+                  <div className="relative aspect-video overflow-hidden rounded-lg">
+                    <Image
+                      src={selectedProject.image || "/placeholder.svg"}
+                      alt={selectedProject.name}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
                 </div>
                 <div className="space-y-4">
                   <p className="text-gray-300">{selectedProject.description || 'No description available'}</p>

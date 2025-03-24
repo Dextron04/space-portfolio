@@ -157,7 +157,7 @@ export default function Portfolio() {
               Hey there! I&apos;m Tushin Kulshreshtha — a passionate Computer Science undergraduate based in San Francisco with a knack for building elegant, scalable, and secure web applications. My curiosity fuels my constant pursuit of innovative tech, whether that means designing RESTful APIs, engineering a custom file system, or crafting a remote monitoring iOS app for a Raspberry Pi cluster.
             </p>
             <p className="text-gray-300">
-              From full-stack engineering internships to AI-driven projects, I've thrived in agile environments, delivering performance-optimised, user-friendly solutions. My journey spans Django, React, Spring Boot, AWS, Caddy, Docker, and more. Outside the code, I enjoy stargazing and solving tough problems—be it in tech or a good board game!
+              From full-stack engineering internships to AI-driven projects, I&apos;ve thrived in agile environments, delivering performance-optimised, user-friendly solutions. My journey spans Django, React, Spring Boot, AWS, Caddy, Docker, and more. Outside the code, I enjoy stargazing and solving tough problems—be it in tech or a good board game!
             </p>
           </div>
           <div className="bg-gradient-to-br from-indigo-900/30 to-purple-900/30 p-6 rounded-lg border border-purple-800/30 backdrop-blur-sm">
