@@ -97,7 +97,7 @@ export default function Portfolio() {
             <Link href="#about" className="hover:text-purple-300 transition-colors">
               About
             </Link>
-            <Link href="#projects" className="hover:text-purple-300 transition-colors">
+            <Link href="/projects" className="hover:text-purple-300 transition-colors">
               Projects
             </Link>
             <Link href="#skills" className="hover:text-purple-300 transition-colors">
@@ -145,38 +145,44 @@ export default function Portfolio() {
         <div className="grid md:grid-cols-2 gap-10 items-center">
           <div className="space-y-4">
             <p className="text-gray-300">
-              Hello! I&apos;m a passionate developer with a love for creating beautiful, functional websites and
-              applications. Just like the vast universe, my curiosity is endless, and I&apos;m always exploring new
-              technologies and approaches.
+              Hey there! I&apos;m Tushin Kulshreshtha — a passionate Computer Science undergraduate based in San Francisco with a knack for building elegant, scalable, and secure web applications. My curiosity fuels my constant pursuit of innovative tech, whether that means designing RESTful APIs, engineering a custom file system, or crafting a remote monitoring iOS app for a Raspberry Pi cluster.
             </p>
             <p className="text-gray-300">
-              With experience in frontend and backend development, I craft digital experiences that are both visually
-              stunning and technically sound. When I&apos;m not coding, you might find me stargazing or reading about the
-              latest advancements in space exploration.
+              From full-stack engineering internships to AI-driven projects, I’ve thrived in agile environments, delivering performance-optimised, user-friendly solutions. My journey spans Django, React, Spring Boot, AWS, Caddy, Docker, and more. Outside the code, I enjoy stargazing and solving tough problems—be it in tech or a good board game!
             </p>
           </div>
           <div className="bg-gradient-to-br from-indigo-900/30 to-purple-900/30 p-6 rounded-lg border border-purple-800/30 backdrop-blur-sm">
             <h3 className="text-xl font-semibold mb-4 text-purple-300">Quick Facts</h3>
             <ul className="space-y-2 text-gray-300">
               <li className="flex items-start">
-                <span className="mr-2">•</span> Based in New York, USA
+                <span className="mr-2">•</span> Based in San Francisco, California
               </li>
               <li className="flex items-start">
-                <span className="mr-2">•</span> 5+ years of development experience
+                <span className="mr-2">•</span> B.S. in Computer Science, GPA 3.95 (SFSU, 2021–2025)
               </li>
               <li className="flex items-start">
-                <span className="mr-2">•</span> Specialized in React, Next.js, and Node.js
+                <span className="mr-2">•</span> Proficient in Python, JavaScript, C++, Java, Spring Boot
               </li>
               <li className="flex items-start">
-                <span className="mr-2">•</span> Worked with startups and enterprise companies
+                <span className="mr-2">•</span> Web stack: React, Next.js, Node.js, Django, REST APIs
               </li>
               <li className="flex items-start">
-                <span className="mr-2">•</span> Computer Science degree from Tech University
+                <span className="mr-2">•</span> Cloud-native: AWS (EC2, Lambda, S3), Docker, Caddy
+              </li>
+              <li className="flex items-start">
+                <span className="mr-2">•</span> Built real-time server dashboards and serverless pipelines
+              </li>
+              <li className="flex items-start">
+                <span className="mr-2">•</span> Current AI Intern @ MeetX; enhancing hybrid recommender systems
+              </li>
+              <li className="flex items-start">
+                <span className="mr-2">•</span> Loves automation, system optimization, and efficient design
               </li>
             </ul>
           </div>
         </div>
       </section>
+
 
       {/* Projects Section */}
       <section id="projects" className="relative z-10 py-20 px-4 md:px-10 max-w-6xl mx-auto">
@@ -233,80 +239,6 @@ export default function Portfolio() {
               </div>
             ),
           )}
-        </div>
-      </section>
-
-      {/* Contact Section */}
-      <section id="contact" className="relative z-10 py-20 px-4 md:px-10 max-w-6xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold mb-12 flex items-center">
-          <Star className="mr-2 text-purple-400" /> Contact Me
-        </h2>
-        <div className="grid md:grid-cols-2 gap-10">
-          <div className="space-y-4">
-            <p className="text-gray-300">
-              Interested in working together? Feel free to reach out to me through any of the channels below. I&apos;m always
-              open to discussing new projects, creative ideas, or opportunities to be part of your vision.
-            </p>
-            <div className="flex items-center gap-3 text-gray-300">
-              <Mail className="text-purple-400" />
-              <span>hello@johndoe.com</span>
-            </div>
-            <div className="flex gap-4 mt-6">
-              <Button className="bg-purple-600 hover:bg-purple-700">Send Message</Button>
-              <Button variant="outline" className="border-purple-700 text-purple-300 hover:bg-purple-900/30">
-                Download Resume
-              </Button>
-            </div>
-          </div>
-          <div className="bg-gradient-to-br from-indigo-900/30 to-purple-900/30 p-6 rounded-lg border border-purple-800/30 backdrop-blur-sm">
-            <form className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <label htmlFor="name" className="text-sm text-gray-300">
-                    Name
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    className="w-full bg-slate-800/70 border border-purple-900/50 rounded-md p-2 text-white"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label htmlFor="email" className="text-sm text-gray-300">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    className="w-full bg-slate-800/70 border border-purple-900/50 rounded-md p-2 text-white"
-                  />
-                </div>
-              </div>
-              <div className="space-y-2">
-                <label htmlFor="subject" className="text-sm text-gray-300">
-                  Subject
-                </label>
-                <input
-                  type="text"
-                  id="subject"
-                  className="w-full bg-slate-800/70 border border-purple-900/50 rounded-md p-2 text-white"
-                />
-              </div>
-              <div className="space-y-2">
-                <label htmlFor="message" className="text-sm text-gray-300">
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  rows={4}
-                  className="w-full bg-slate-800/70 border border-purple-900/50 rounded-md p-2 text-white"
-                ></textarea>
-              </div>
-              <Button type="submit" className="w-full bg-purple-600 hover:bg-purple-700">
-                Send Message
-              </Button>
-            </form>
-          </div>
         </div>
       </section>
 
