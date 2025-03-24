@@ -144,15 +144,6 @@ export default function Portfolio() {
         </h2>
         <div className="grid md:grid-cols-2 gap-10 items-center">
           <div className="space-y-4">
-            <div className="relative w-full h-[300px] mb-6 rounded-lg overflow-hidden">
-              <Image
-                src="/your-photo.jpg"
-                alt="Tushin Kulshreshtha"
-                fill
-                className="object-cover"
-                priority
-              />
-            </div>
             <p className="text-gray-300">
               Hey there! I&apos;m Tushin Kulshreshtha — a passionate Computer Science undergraduate based in San Francisco with a knack for building elegant, scalable, and secure web applications. My curiosity fuels my constant pursuit of innovative tech, whether that means designing RESTful APIs, engineering a custom file system, or crafting a remote monitoring iOS app for a Raspberry Pi cluster.
             </p>
