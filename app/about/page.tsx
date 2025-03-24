@@ -1,14 +1,14 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { motion } from "framer-motion"
 import Link from "next/link"
 import Image from "next/image"
+import ReCAPTCHA from "react-google-recaptcha"
 import {
     ArrowLeft,
     BookOpen,
     BriefcaseBusiness,
-    Calendar,
     ChevronLeft,
     ChevronRight,
     Download,
@@ -20,8 +20,26 @@ import {
 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
-import { Dialog, DialogContent } from "@/components/ui/dialog"
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+
+// Add reCAPTCHA script
+declare global {
+    interface Window {
+        grecaptcha: {
+            ready: (callback: () => void) => void;
+            render: (element: string | HTMLElement, options: RecaptchaOptions) => number;
+            reset: (id: number) => void;
+        };
+    }
+}
+
+interface RecaptchaOptions {
+    sitekey: string;
+    callback: (token: string) => void;
+    theme?: 'light' | 'dark';
+    size?: 'normal' | 'compact';
+}
 
 // Sample personal data - replace with your actual information
 const personalData = {
@@ -29,100 +47,96 @@ const personalData = {
     title: "Software Developer & Space Enthusiast",
     bio: "I'm a passionate software developer with over 5 years of experience creating innovative digital solutions. My journey in technology began with a fascination for how software can transform ideas into reality, and that excitement continues to drive me today.",
     longBio:
-        "Beyond coding, I'm deeply interested in astronomy and space exploration. The vastness of the universe and the endless possibilities it represents mirror what I love about software development: the boundless potential to create and discover. This connection between technology and the cosmos has shaped my approach to problem-solving and innovation.\n\nI believe in writing clean, maintainable code and creating intuitive user experiences. Whether I'm building a complex web application or a simple utility, I focus on delivering solutions that are both technically sound and user-friendly.",
+        "As a Computer Science undergraduate with hands-on experience across full-stack development, cloud infrastructure, and AI-driven systems, I thrive at the intersection of creativity and engineering. My passion lies in building secure, scalable applications—whether it's designing REST APIs, deploying serverless pipelines on AWS, or creating tools to manage a Raspberry Pi cluster.\n\nBeyond code, I find inspiration in the structure and mystery of the cosmos. Just as space offers infinite frontiers, software development fuels my curiosity with its endless room to build, optimise, and explore. I'm driven by clean architecture, practical innovation, and user-first design—bringing both precision and imagination into everything I create.",
     location: "New York, USA",
     email: "tushin@example.com",
     education: [
         {
-            degree: "Master of Science in Computer Science",
-            institution: "Tech University",
-            location: "New York",
-            period: "2016 - 2018",
+            degree: "Bachelor of Science in Computer Science",
+            institution: "San Francisco State University",
+            location: "San Francisco, California",
+            period: "Aug 2021 – Dec 2025",
             description:
-                "Specialized in Artificial Intelligence and Machine Learning. Thesis on Neural Networks for Astronomical Data Analysis.",
-        },
-        {
-            degree: "Bachelor of Science in Software Engineering",
-            institution: "State University",
-            location: "California",
-            period: "2012 - 2016",
-            description: "Graduated with honors. Participated in multiple hackathons and coding competitions.",
+                "GPA: 3.95. Focused on full-stack development, cloud computing, and systems programming through hands-on projects and advanced coursework.",
         },
     ],
     experience: [
         {
-            position: "Senior Software Developer",
-            company: "Cosmic Technologies",
-            location: "New York",
-            period: "2020 - Present",
+            position: "AI Intern",
+            company: "MeetX",
+            location: "Remote",
+            period: "Feb 2025 – Present",
             description:
-                "Lead developer for multiple web and mobile applications. Implemented CI/CD pipelines and mentored junior developers.",
+                "Built a hybrid recommendation system using collaborative filtering and content-based models. Improved cold-start handling and prediction accuracy using XGBoost and TensorFlow.",
         },
         {
-            position: "Full Stack Developer",
-            company: "Stellar Solutions Inc.",
-            location: "San Francisco",
-            period: "2018 - 2020",
-            description: "Developed and maintained various client projects using React, Node.js, and AWS.",
+            position: "Software Engineer Intern (Full Stack)",
+            company: "Site Service Software Inc.",
+            location: "Remote",
+            period: "Aug 2024 – Present",
+            description:
+                "Migrated legacy systems to React and Spring Boot. Designed 20+ REST APIs and enhanced security with improved authentication and data encryption.",
         },
         {
-            position: "Software Engineering Intern",
-            company: "Orbit Innovations",
-            location: "Boston",
-            period: "Summer 2017",
-            description: "Assisted in developing a data visualization tool for astronomical datasets.",
+            position: "Lead Software Developer Intern",
+            company: "Glitter Fund",
+            location: "Remote",
+            period: "Jan 2023 – Dec 2023",
+            description:
+                "Led a team to build a Django-based stock filtering platform. Integrated Tradier API, reduced latency by 30%, and deployed infrastructure on AWS EC2.",
         },
     ],
+
     interests: [
         "Astronomy & Space Exploration",
-        "Astrophotography",
         "Hiking & Nature Photography",
         "Science Fiction Literature",
-        "Piano & Classical Music",
-        "Open Source Contributing",
+        "Gaming",
+        "Socializing",
+        "Traveling",
     ],
     photos: [
         {
             id: 1,
-            title: "Stargazing in Colorado",
-            description: "Capturing the Milky Way during a camping trip in the Rocky Mountains.",
-            image: "/photos/stargazing-colorado.jpg",
+            title: "Time in Lake Tahoe",
+            description: "Fall break in Lake Tahoe with friends.",
+            image: "/photos/IMG_6479.jpeg",
             date: "August 2022",
         },
         {
             id: 2,
-            title: "Coding Retreat",
-            description: "Working on a new project during a developer retreat in the mountains.",
-            image: "/photos/coding-retreat.jpg",
+            title: "Weekend in the Mountains",
+            description: "A weekend getaway to the mountains with friends.",
+            image: "/photos/IMG_5384.jpeg",
             date: "March 2023",
         },
         {
             id: 3,
-            title: "Tech Conference",
-            description: "Speaking about space-themed UI design at DevConf 2023.",
-            image: "/photos/tech-conference.jpg",
+            title: "Museum of Fine Arts",
+            description: "Visiting the Museum of Fine Arts in San Francisco.",
+            image: "/photos/IMG_6842.jpeg",
             date: "June 2023",
         },
         {
             id: 4,
-            title: "Observatory Visit",
-            description: "Visiting the Griffith Observatory in Los Angeles.",
-            image: "/photos/observatory.jpg",
+            title: "Wandering around the university",
+            description: "Wandering around the university",
+            image: "/photos/IMG_7111.jpeg",
             date: "January 2023",
         },
         {
             id: 5,
-            title: "Hiking Adventure",
-            description: "Exploring nature trails and taking landscape photographs.",
-            image: "/photos/hiking.jpg",
+            title: "Half Moon Bay",
+            description: "Half Moon Bay during the night.",
+            image: "/photos/IMG_7241.jpeg",
             date: "July 2022",
         },
         {
             id: 6,
-            title: "Hackathon Winner",
-            description: "Our team won first place at the Space Apps Challenge.",
-            image: "/photos/hackathon.jpg",
-            date: "October 2022",
+            title: "Just a good day",
+            description: "Just a good day",
+            image: "/photos/hike.jpeg",
+            date: "July 2022",
         },
     ],
 }
@@ -131,6 +145,29 @@ export default function AboutPage() {
     const [selectedPhoto, setSelectedPhoto] = useState<(typeof personalData.photos)[0] | null>(null)
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0)
+    const [showCaptcha, setShowCaptcha] = useState(false)
+    const recaptchaRef = useRef<ReCAPTCHA>(null)
+
+    // Handle resume download
+    const handleResumeDownload = () => {
+        setShowCaptcha(true)
+    }
+
+    // Handle CAPTCHA verification
+    const handleCaptchaVerify = (token: string | null) => {
+        if (token) {
+            // Start download after successful verification
+            const link = document.createElement('a')
+            link.href = '/Tushin_Resume.pdf'
+            link.download = 'Tushin_Kulshreshtha_Resume.pdf'
+            document.body.appendChild(link)
+            link.click()
+            document.body.removeChild(link)
+            setShowCaptcha(false)
+            // Reset the CAPTCHA
+            recaptchaRef.current?.reset()
+        }
+    }
 
     // Handle photo selection and modal
     const openPhotoModal = (photo: (typeof personalData.photos)[0], index: number) => {
@@ -244,11 +281,11 @@ export default function AboutPage() {
                             <p className="text-xl text-gray-300 mb-6">{personalData.title}</p>
                             <p className="text-gray-300 mb-8 max-w-2xl">{personalData.bio}</p>
                             <div className="flex flex-wrap gap-4 justify-center md:justify-start">
-                                <Button className="bg-purple-600 hover:bg-purple-700">
+                                <Button
+                                    className="bg-purple-600 hover:bg-purple-700"
+                                    onClick={handleResumeDownload}
+                                >
                                     <Download className="mr-2 h-4 w-4" /> Download Resume
-                                </Button>
-                                <Button variant="outline" className="border-purple-700 text-purple-300 hover:bg-purple-900/30">
-                                    <Calendar className="mr-2 h-4 w-4" /> Schedule a Call
                                 </Button>
                             </div>
                         </div>
@@ -289,20 +326,28 @@ export default function AboutPage() {
                             value="education"
                             className="mt-6 bg-slate-900/60 backdrop-blur-sm rounded-lg border border-purple-900/30 p-6"
                         >
-                            <h3 className="text-2xl font-bold mb-4 flex items-center">
+                            <h3 className="text-2xl font-bold mb-8 flex items-center">
                                 <GraduationCap className="mr-2 text-purple-400" /> Education
                             </h3>
                             <div className="space-y-8">
                                 {personalData.education.map((edu, index) => (
-                                    <div key={index} className="relative pl-8 pb-8 border-l border-purple-800/50 last:border-0 last:pb-0">
-                                        <div className="absolute left-0 top-0 w-4 h-4 -translate-x-2 rounded-full bg-purple-600"></div>
-                                        <div className="mb-1 text-sm text-purple-300">{edu.period}</div>
-                                        <h4 className="text-xl font-bold mb-1">{edu.degree}</h4>
-                                        <div className="text-gray-300 mb-2">
-                                            {edu.institution}, {edu.location}
+                                    <motion.div
+                                        key={index}
+                                        initial={{ opacity: 0, x: -20 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        transition={{ delay: index * 0.1 }}
+                                        className="relative pl-8 pb-8 border-l-2 border-purple-600/50 last:border-0 last:pb-0"
+                                    >
+                                        <div className="absolute left-0 top-0 w-4 h-4 -translate-x-[9px] rounded-full bg-purple-600 ring-4 ring-purple-900/50"></div>
+                                        <div className="mb-2 text-sm text-purple-300 font-medium">{edu.period}</div>
+                                        <h4 className="text-xl font-bold mb-2 text-white">{edu.degree}</h4>
+                                        <div className="text-gray-300 mb-3 flex items-center gap-2">
+                                            <span className="font-medium">{edu.institution}</span>
+                                            <span className="text-purple-400">•</span>
+                                            <span>{edu.location}</span>
                                         </div>
-                                        <p className="text-gray-400">{edu.description}</p>
-                                    </div>
+                                        <p className="text-gray-400 leading-relaxed">{edu.description}</p>
+                                    </motion.div>
                                 ))}
                             </div>
                         </TabsContent>
@@ -310,20 +355,28 @@ export default function AboutPage() {
                             value="experience"
                             className="mt-6 bg-slate-900/60 backdrop-blur-sm rounded-lg border border-purple-900/30 p-6"
                         >
-                            <h3 className="text-2xl font-bold mb-4 flex items-center">
+                            <h3 className="text-2xl font-bold mb-8 flex items-center">
                                 <BriefcaseBusiness className="mr-2 text-purple-400" /> Work Experience
                             </h3>
                             <div className="space-y-8">
                                 {personalData.experience.map((exp, index) => (
-                                    <div key={index} className="relative pl-8 pb-8 border-l border-purple-800/50 last:border-0 last:pb-0">
-                                        <div className="absolute left-0 top-0 w-4 h-4 -translate-x-2 rounded-full bg-purple-600"></div>
-                                        <div className="mb-1 text-sm text-purple-300">{exp.period}</div>
-                                        <h4 className="text-xl font-bold mb-1">{exp.position}</h4>
-                                        <div className="text-gray-300 mb-2">
-                                            {exp.company}, {exp.location}
+                                    <motion.div
+                                        key={index}
+                                        initial={{ opacity: 0, x: -20 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        transition={{ delay: index * 0.1 }}
+                                        className="relative pl-8 pb-8 border-l-2 border-purple-600/50 last:border-0 last:pb-0"
+                                    >
+                                        <div className="absolute left-0 top-0 w-4 h-4 -translate-x-[9px] rounded-full bg-purple-600 ring-4 ring-purple-900/50"></div>
+                                        <div className="mb-2 text-sm text-purple-300 font-medium">{exp.period}</div>
+                                        <h4 className="text-xl font-bold mb-2 text-white">{exp.position}</h4>
+                                        <div className="text-gray-300 mb-3 flex items-center gap-2">
+                                            <span className="font-medium">{exp.company}</span>
+                                            <span className="text-purple-400">•</span>
+                                            <span>{exp.location}</span>
                                         </div>
-                                        <p className="text-gray-400">{exp.description}</p>
-                                    </div>
+                                        <p className="text-gray-400 leading-relaxed">{exp.description}</p>
+                                    </motion.div>
                                 ))}
                             </div>
                         </TabsContent>
@@ -433,6 +486,23 @@ export default function AboutPage() {
                             </div>
                         </div>
                     )}
+                </DialogContent>
+            </Dialog>
+
+            {/* CAPTCHA Modal */}
+            <Dialog open={showCaptcha} onOpenChange={setShowCaptcha}>
+                <DialogContent className="bg-slate-900/95 border-purple-900/50 text-white">
+                    <DialogHeader>
+                        <DialogTitle className="text-xl font-bold">Verify Human</DialogTitle>
+                    </DialogHeader>
+                    <div className="flex justify-center py-4">
+                        <ReCAPTCHA
+                            ref={recaptchaRef}
+                            sitekey="6LfB5_4qAAAAAM3ekvLxUQ7oZkDORVu9W4xP7MNU"
+                            onChange={handleCaptchaVerify}
+                            theme="dark"
+                        />
+                    </div>
                 </DialogContent>
             </Dialog>
 

@@ -16,7 +16,7 @@ export function MobileNav() {
 
     return (
         <nav className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 md:hidden">
-            <div className="flex justify-around items-center h-16 px-6 bg-slate-900/80 backdrop-blur-sm border border-purple-900/30 rounded-full shadow-lg shadow-purple-900/20">
+            <div className="flex justify-between items-center h-16 px-8 bg-slate-900/80 backdrop-blur-sm border border-purple-900/30 rounded-full shadow-lg shadow-purple-900/20">
                 {navItems.map((item) => {
                     const Icon = item.icon
                     const isActive = pathname === item.href
@@ -24,7 +24,7 @@ export function MobileNav() {
                         <Link
                             key={item.href}
                             href={item.href}
-                            className={`flex flex-col items-center justify-center w-full h-full ${isActive ? "text-purple-400" : "text-gray-400 hover:text-purple-300"
+                            className={`flex flex-col items-center justify-center w-20 h-full ${isActive ? "text-purple-400" : "text-gray-400 hover:text-purple-300"
                                 }`}
                         >
                             <Icon className="h-5 w-5" />
