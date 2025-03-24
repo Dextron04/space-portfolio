@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
-import { ChevronDown, Github, Linkedin, Mail, Moon, Star } from "lucide-react"
+import { ChevronDown, Github, Linkedin, Moon, Star } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 
@@ -144,11 +144,20 @@ export default function Portfolio() {
         </h2>
         <div className="grid md:grid-cols-2 gap-10 items-center">
           <div className="space-y-4">
+            <div className="relative w-full h-[300px] mb-6 rounded-lg overflow-hidden">
+              <Image
+                src="/your-photo.jpg"
+                alt="Tushin Kulshreshtha"
+                fill
+                className="object-cover"
+                priority
+              />
+            </div>
             <p className="text-gray-300">
               Hey there! I&apos;m Tushin Kulshreshtha — a passionate Computer Science undergraduate based in San Francisco with a knack for building elegant, scalable, and secure web applications. My curiosity fuels my constant pursuit of innovative tech, whether that means designing RESTful APIs, engineering a custom file system, or crafting a remote monitoring iOS app for a Raspberry Pi cluster.
             </p>
             <p className="text-gray-300">
-              From full-stack engineering internships to AI-driven projects, I’ve thrived in agile environments, delivering performance-optimised, user-friendly solutions. My journey spans Django, React, Spring Boot, AWS, Caddy, Docker, and more. Outside the code, I enjoy stargazing and solving tough problems—be it in tech or a good board game!
+              From full-stack engineering internships to AI-driven projects, I've thrived in agile environments, delivering performance-optimised, user-friendly solutions. My journey spans Django, React, Spring Boot, AWS, Caddy, Docker, and more. Outside the code, I enjoy stargazing and solving tough problems—be it in tech or a good board game!
             </p>
           </div>
           <div className="bg-gradient-to-br from-indigo-900/30 to-purple-900/30 p-6 rounded-lg border border-purple-800/30 backdrop-blur-sm">
