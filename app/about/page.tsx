@@ -221,7 +221,7 @@ export default function AboutPage() {
             </header>
 
             {/* Main content */}
-            <main className="relative z-10 max-w-7xl mx-auto px-4 py-12">
+            <main className="relative z-10 max-w-7xl mx-auto px-4 py-12 pb-24 md:pb-12">
                 {/* Hero section */}
                 <section className="mb-16">
                     <div className="flex flex-col md:flex-row gap-10 items-center">

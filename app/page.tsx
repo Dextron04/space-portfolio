@@ -137,110 +137,113 @@ export default function Portfolio() {
         </motion.div>
       </header>
 
-      {/* About Section */}
-      <section id="about" className="relative z-10 py-20 px-4 md:px-10 max-w-6xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold mb-12 flex items-center">
-          <Star className="mr-2 text-purple-400" /> About Me
-        </h2>
-        <div className="grid md:grid-cols-2 gap-10 items-center">
-          <div className="space-y-4">
-            <p className="text-gray-300">
-              Hey there! I&apos;m Tushin Kulshreshtha — a passionate Computer Science undergraduate based in San Francisco with a knack for building elegant, scalable, and secure web applications. My curiosity fuels my constant pursuit of innovative tech, whether that means designing RESTful APIs, engineering a custom file system, or crafting a remote monitoring iOS app for a Raspberry Pi cluster.
-            </p>
-            <p className="text-gray-300">
-              From full-stack engineering internships to AI-driven projects, I&apos;ve thrived in agile environments, delivering performance-optimised, user-friendly solutions. My journey spans Django, React, Spring Boot, AWS, Caddy, Docker, and more. Outside the code, I enjoy stargazing and solving tough problems—be it in tech or a good board game!
-            </p>
+      {/* Main content */}
+      <main className="relative z-10 max-w-7xl mx-auto px-4 py-12 pb-24 md:pb-12">
+        {/* About Section */}
+        <section id="about" className="relative z-10 py-20 px-4 md:px-10 max-w-6xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold mb-12 flex items-center">
+            <Star className="mr-2 text-purple-400" /> About Me
+          </h2>
+          <div className="grid md:grid-cols-2 gap-10 items-center">
+            <div className="space-y-4">
+              <p className="text-gray-300">
+                Hey there! I&apos;m Tushin Kulshreshtha — a passionate Computer Science undergraduate based in San Francisco with a knack for building elegant, scalable, and secure web applications. My curiosity fuels my constant pursuit of innovative tech, whether that means designing RESTful APIs, engineering a custom file system, or crafting a remote monitoring iOS app for a Raspberry Pi cluster.
+              </p>
+              <p className="text-gray-300">
+                From full-stack engineering internships to AI-driven projects, I&apos;ve thrived in agile environments, delivering performance-optimised, user-friendly solutions. My journey spans Django, React, Spring Boot, AWS, Caddy, Docker, and more. Outside the code, I enjoy stargazing and solving tough problems—be it in tech or a good board game!
+              </p>
+            </div>
+            <div className="bg-gradient-to-br from-indigo-900/30 to-purple-900/30 p-6 rounded-lg border border-purple-800/30 backdrop-blur-sm">
+              <h3 className="text-xl font-semibold mb-4 text-purple-300">Quick Facts</h3>
+              <ul className="space-y-2 text-gray-300">
+                <li className="flex items-start">
+                  <span className="mr-2">•</span> Based in San Francisco, California
+                </li>
+                <li className="flex items-start">
+                  <span className="mr-2">•</span> B.S. in Computer Science, GPA 3.95 (SFSU, 2021–2025)
+                </li>
+                <li className="flex items-start">
+                  <span className="mr-2">•</span> Proficient in Python, JavaScript, C++, Java, Spring Boot
+                </li>
+                <li className="flex items-start">
+                  <span className="mr-2">•</span> Web stack: React, Next.js, Node.js, Django, REST APIs
+                </li>
+                <li className="flex items-start">
+                  <span className="mr-2">•</span> Cloud-native: AWS (EC2, Lambda, S3), Docker, Caddy
+                </li>
+                <li className="flex items-start">
+                  <span className="mr-2">•</span> Built real-time server dashboards and serverless pipelines
+                </li>
+                <li className="flex items-start">
+                  <span className="mr-2">•</span> Current AI Intern @ MeetX; enhancing hybrid recommender systems
+                </li>
+                <li className="flex items-start">
+                  <span className="mr-2">•</span> Loves automation, system optimization, and efficient design
+                </li>
+              </ul>
+            </div>
           </div>
-          <div className="bg-gradient-to-br from-indigo-900/30 to-purple-900/30 p-6 rounded-lg border border-purple-800/30 backdrop-blur-sm">
-            <h3 className="text-xl font-semibold mb-4 text-purple-300">Quick Facts</h3>
-            <ul className="space-y-2 text-gray-300">
-              <li className="flex items-start">
-                <span className="mr-2">•</span> Based in San Francisco, California
-              </li>
-              <li className="flex items-start">
-                <span className="mr-2">•</span> B.S. in Computer Science, GPA 3.95 (SFSU, 2021–2025)
-              </li>
-              <li className="flex items-start">
-                <span className="mr-2">•</span> Proficient in Python, JavaScript, C++, Java, Spring Boot
-              </li>
-              <li className="flex items-start">
-                <span className="mr-2">•</span> Web stack: React, Next.js, Node.js, Django, REST APIs
-              </li>
-              <li className="flex items-start">
-                <span className="mr-2">•</span> Cloud-native: AWS (EC2, Lambda, S3), Docker, Caddy
-              </li>
-              <li className="flex items-start">
-                <span className="mr-2">•</span> Built real-time server dashboards and serverless pipelines
-              </li>
-              <li className="flex items-start">
-                <span className="mr-2">•</span> Current AI Intern @ MeetX; enhancing hybrid recommender systems
-              </li>
-              <li className="flex items-start">
-                <span className="mr-2">•</span> Loves automation, system optimization, and efficient design
-              </li>
-            </ul>
+        </section>
+
+
+        {/* Projects Section */}
+        <section id="projects" className="relative z-10 py-20 px-4 md:px-10 max-w-6xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold mb-12 flex items-center">
+            <Star className="mr-2 text-purple-400" /> My Projects
+          </h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[1, 2, 3].map((project) => (
+              <Card key={project} className="bg-slate-900/60 border-purple-900/50 backdrop-blur-sm overflow-hidden">
+                <div className="h-48 bg-gradient-to-br from-indigo-800/20 to-purple-800/20 flex items-center justify-center">
+                  <Image
+                    src={`/placeholder.svg?height=200&width=400`}
+                    alt={`Project ${project}`}
+                    className="object-cover"
+                    layout="fill"
+                  />
+                </div>
+                <CardHeader>
+                  <CardTitle className="text-white">Project {project}</CardTitle>
+                  <CardDescription className="text-gray-400">A brief description of this amazing project</CardDescription>
+                </CardHeader>
+                <CardContent className="text-gray-300">
+                  <p>
+                    This project showcases my skills in React, Next.js, and Tailwind CSS. It features a responsive design
+                    and interactive elements.
+                  </p>
+                </CardContent>
+                <CardFooter className="flex justify-between">
+                  <Button variant="outline" className="border-purple-700 text-purple-300 hover:bg-purple-900/30">
+                    View Demo
+                  </Button>
+                  <Button variant="ghost" className="text-gray-300 hover:text-purple-300">
+                    <Github className="h-5 w-5 mr-2" /> Code
+                  </Button>
+                </CardFooter>
+              </Card>
+            ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-
-      {/* Projects Section */}
-      <section id="projects" className="relative z-10 py-20 px-4 md:px-10 max-w-6xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold mb-12 flex items-center">
-          <Star className="mr-2 text-purple-400" /> My Projects
-        </h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {[1, 2, 3].map((project) => (
-            <Card key={project} className="bg-slate-900/60 border-purple-900/50 backdrop-blur-sm overflow-hidden">
-              <div className="h-48 bg-gradient-to-br from-indigo-800/20 to-purple-800/20 flex items-center justify-center">
-                <Image
-                  src={`/placeholder.svg?height=200&width=400`}
-                  alt={`Project ${project}`}
-                  className="object-cover"
-                  layout="fill"
-                />
-              </div>
-              <CardHeader>
-                <CardTitle className="text-white">Project {project}</CardTitle>
-                <CardDescription className="text-gray-400">A brief description of this amazing project</CardDescription>
-              </CardHeader>
-              <CardContent className="text-gray-300">
-                <p>
-                  This project showcases my skills in React, Next.js, and Tailwind CSS. It features a responsive design
-                  and interactive elements.
-                </p>
-              </CardContent>
-              <CardFooter className="flex justify-between">
-                <Button variant="outline" className="border-purple-700 text-purple-300 hover:bg-purple-900/30">
-                  View Demo
-                </Button>
-                <Button variant="ghost" className="text-gray-300 hover:text-purple-300">
-                  <Github className="h-5 w-5 mr-2" /> Code
-                </Button>
-              </CardFooter>
-            </Card>
-          ))}
-        </div>
-      </section>
-
-      {/* Skills Section */}
-      <section id="skills" className="relative z-10 py-20 px-4 md:px-10 max-w-6xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold mb-12 flex items-center">
-          <Star className="mr-2 text-purple-400" /> My Skills
-        </h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {["JavaScript", "TypeScript", "React", "Next.js", "Node.js", "Tailwind CSS", "GraphQL", "MongoDB"].map(
-            (skill) => (
-              <div
-                key={skill}
-                className="bg-gradient-to-br from-slate-900/80 to-indigo-900/50 p-4 rounded-lg border border-purple-800/30 backdrop-blur-sm text-center"
-              >
-                <div className="text-lg font-medium text-gray-200">{skill}</div>
-              </div>
-            ),
-          )}
-        </div>
-      </section>
+        {/* Skills Section */}
+        <section id="skills" className="relative z-10 py-20 px-4 md:px-10 max-w-6xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold mb-12 flex items-center">
+            <Star className="mr-2 text-purple-400" /> My Skills
+          </h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {["JavaScript", "TypeScript", "React", "Next.js", "Node.js", "Tailwind CSS", "GraphQL", "MongoDB"].map(
+              (skill) => (
+                <div
+                  key={skill}
+                  className="bg-gradient-to-br from-slate-900/80 to-indigo-900/50 p-4 rounded-lg border border-purple-800/30 backdrop-blur-sm text-center"
+                >
+                  <div className="text-lg font-medium text-gray-200">{skill}</div>
+                </div>
+              ),
+            )}
+          </div>
+        </section>
+      </main>
 
       {/* Footer */}
       <footer className="relative z-10 py-8 border-t border-purple-900/30 mt-20">

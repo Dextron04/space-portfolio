@@ -138,7 +138,7 @@ export default function ProjectsPage() {
       </header>
 
       {/* Main content */}
-      <main className="relative z-10 max-w-7xl mx-auto px-4 py-12">
+      <main className="relative z-10 max-w-7xl mx-auto px-4 py-12 pb-24 md:pb-12">
         {/* Featured projects section */}
         <section className="mb-16">
           <h2 className="text-3xl font-bold mb-8 flex items-center">
