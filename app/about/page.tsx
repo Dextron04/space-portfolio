@@ -150,6 +150,10 @@ export default function AboutPage() {
 
     // Handle resume download
     const handleResumeDownload = () => {
+        if (!process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY) {
+            console.error('reCAPTCHA site key is missing');
+            return;
+        }
         setShowCaptcha(true)
     }
 
@@ -496,12 +500,16 @@ export default function AboutPage() {
                         <DialogTitle className="text-xl font-bold">Verify Human</DialogTitle>
                     </DialogHeader>
                     <div className="flex justify-center py-4">
-                        <ReCAPTCHA
-                            ref={recaptchaRef}
-                            sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
-                            onChange={handleCaptchaVerify}
-                            theme="dark"
-                        />
+                        {process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ? (
+                            <ReCAPTCHA
+                                ref={recaptchaRef}
+                                sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+                                onChange={handleCaptchaVerify}
+                                theme="dark"
+                            />
+                        ) : (
+                            <div className="text-red-400">Error: reCAPTCHA configuration is missing</div>
+                        )}
                     </div>
                 </DialogContent>
             </Dialog>
