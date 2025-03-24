@@ -498,7 +498,7 @@ export default function AboutPage() {
                     <div className="flex justify-center py-4">
                         <ReCAPTCHA
                             ref={recaptchaRef}
-                            sitekey="6LfB5_4qAAAAAM3ekvLxUQ7oZkDORVu9W4xP7MNU"
+                            sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
                             onChange={handleCaptchaVerify}
                             theme="dark"
                         />
