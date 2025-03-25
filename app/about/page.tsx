@@ -274,13 +274,15 @@ export default function AboutPage() {
                     <div className="flex flex-col md:flex-row gap-10 items-center">
                         <div className="md:w-1/3">
                             <div className="relative w-64 h-64 mx-auto overflow-hidden rounded-full border-4 border-purple-600/50">
-                                <Image
-                                    src="/photos/tk.jpeg"
-                                    alt={personalData.name}
-                                    fill
-                                    className="object-cover"
-                                    priority
-                                />
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                    <Image
+                                        src="/photos/tk.jpeg"
+                                        alt={personalData.name}
+                                        fill
+                                        className="object-cover object-center"
+                                        priority
+                                    />
+                                </div>
                                 <div className="absolute inset-0 bg-gradient-to-t from-purple-900/50 to-transparent"></div>
                             </div>
                         </div>
