@@ -150,6 +150,7 @@ export default function AboutPage() {
 
     // Handle resume download
     const handleResumeDownload = () => {
+        console.log('Environment variable:', process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY);
         if (!process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY) {
             console.error('reCAPTCHA site key is missing');
             return;
@@ -160,16 +161,21 @@ export default function AboutPage() {
     // Handle CAPTCHA verification
     const handleCaptchaVerify = (token: string | null) => {
         if (token) {
-            // Start download after successful verification
-            const link = document.createElement('a')
-            link.href = '/Tushin_Resume.pdf'
-            link.download = 'Tushin_Kulshreshtha_Resume.pdf'
-            document.body.appendChild(link)
-            link.click()
-            document.body.removeChild(link)
-            setShowCaptcha(false)
-            // Reset the CAPTCHA
-            recaptchaRef.current?.reset()
+            try {
+                // Start download after successful verification
+                const link = document.createElement('a')
+                link.href = '/Tushin_Resume.pdf'
+                link.download = 'Tushin_Kulshreshtha_Resume.pdf'
+                document.body.appendChild(link)
+                link.click()
+                document.body.removeChild(link)
+                setShowCaptcha(false)
+                // Reset the CAPTCHA
+                recaptchaRef.current?.reset()
+            } catch (error) {
+                console.error('Error during download:', error)
+                recaptchaRef.current?.reset()
+            }
         }
     }
 
@@ -494,21 +500,44 @@ export default function AboutPage() {
             </Dialog>
 
             {/* CAPTCHA Modal */}
-            <Dialog open={showCaptcha} onOpenChange={setShowCaptcha}>
-                <DialogContent className="bg-slate-900/95 border-purple-900/50 text-white">
-                    <DialogHeader>
-                        <DialogTitle className="text-xl font-bold">Verify Human</DialogTitle>
+            <Dialog open={showCaptcha} onOpenChange={(open) => {
+                setShowCaptcha(open)
+                if (!open) {
+                    recaptchaRef.current?.reset()
+                }
+            }}>
+                <DialogContent className="bg-slate-900/95 border-purple-900/50 text-white w-[95vw] max-w-[400px] p-4 md:p-6">
+                    <DialogHeader className="mb-4">
+                        <DialogTitle className="text-lg md:text-xl font-bold text-center">Verify Human</DialogTitle>
                     </DialogHeader>
-                    <div className="flex justify-center py-4">
+                    <div className="flex flex-col items-center justify-center py-2">
                         {process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ? (
-                            <ReCAPTCHA
-                                ref={recaptchaRef}
-                                sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
-                                onChange={handleCaptchaVerify}
-                                theme="dark"
-                            />
+                            <>
+                                <div className="scale-[0.85] md:scale-100">
+                                    <ReCAPTCHA
+                                        ref={recaptchaRef}
+                                        sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+                                        onChange={handleCaptchaVerify}
+                                        theme="dark"
+                                        onError={(error) => {
+                                            console.error('reCAPTCHA error occurred:', error)
+                                            recaptchaRef.current?.reset()
+                                        }}
+                                        onExpired={() => {
+                                            console.log('reCAPTCHA expired')
+                                            recaptchaRef.current?.reset()
+                                        }}
+                                    />
+                                </div>
+                                <p className="text-xs md:text-sm text-gray-400 mt-4 text-center">
+                                    If you see a 401 error, please contact the site administrator.
+                                </p>
+                            </>
                         ) : (
-                            <div className="text-red-400">Error: reCAPTCHA configuration is missing</div>
+                            <div className="text-red-400 text-sm md:text-base text-center">
+                                Error: reCAPTCHA configuration is missing.
+                                Please check your environment variables.
+                            </div>
                         )}
                     </div>
                 </DialogContent>
