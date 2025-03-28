@@ -125,16 +125,18 @@ export default function ProjectsPage() {
       </div>
 
       {/* Header with navigation */}
-      <header className="relative z-10 p-6 flex justify-between items-center border-b border-purple-900/30">
+      <header className="relative z-10 p-4 md:p-6 flex justify-between items-center border-b border-purple-900/30 bg-black/20 backdrop-blur-sm">
         <Link href="/" className="flex items-center gap-2 text-purple-300 hover:text-purple-200 transition-colors">
           <ArrowLeft className="h-5 w-5" />
-          <span>Back to Home</span>
+          <span className="hidden sm:inline">Back to Home</span>
         </Link>
-        <div className="flex items-center gap-2">
-          <Moon className="text-purple-300" />
-          <h1 className="text-2xl font-bold">My Projects</h1>
+        <div className="flex items-center gap-3">
+          <Moon className="h-5 w-5 text-purple-400" />
+          <h1 className="text-xl md:text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-300 to-blue-400">
+            My Projects
+          </h1>
         </div>
-        <div className="w-[100px]"></div> {/* Spacer for centering */}
+        <div className="w-[72px] sm:w-[100px]"></div> {/* Responsive spacer */}
       </header>
 
       {/* Main content */}
@@ -187,9 +189,10 @@ export default function ProjectsPage() {
         </section>
 
         {/* Filters and search section */}
-        <section className="mb-10 bg-slate-900/60 backdrop-blur-sm rounded-lg border border-purple-900/30 p-6">
-          <div className="flex flex-col md:flex-row justify-between gap-4 mb-6">
-            <div className="relative flex-1">
+        <section className="mb-10 bg-slate-900/60 backdrop-blur-sm rounded-lg border border-purple-900/30 p-4 md:p-6">
+          <div className="space-y-4">
+            {/* Search bar */}
+            <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
               <Input
                 type="text"
@@ -199,7 +202,9 @@ export default function ProjectsPage() {
                 className="pl-10 bg-slate-800/70 border-purple-900/50 text-white"
               />
             </div>
-            <div className="flex gap-2">
+
+            {/* Filter buttons */}
+            <div className="grid grid-cols-2 md:flex md:flex-row gap-2">
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="outline" className="border-purple-700 text-purple-300 hover:bg-purple-900/30">
@@ -208,7 +213,7 @@ export default function ProjectsPage() {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="bg-slate-900 border-purple-800">
                   <DropdownMenuItem
-                    className={!selectedCategory ? "text-purple-400" : ""}
+                    className={`cursor-pointer hover:bg-purple-900/30 ${!selectedCategory ? "text-purple-400 font-medium" : "text-gray-200"}`}
                     onClick={() => setSelectedCategory(null)}
                   >
                     All Categories
@@ -216,7 +221,7 @@ export default function ProjectsPage() {
                   {allCategories.map((category) => (
                     <DropdownMenuItem
                       key={category}
-                      className={selectedCategory === category ? "text-purple-400" : ""}
+                      className={`cursor-pointer hover:bg-purple-900/30 ${selectedCategory === category ? "text-purple-400 font-medium" : "text-gray-200"}`}
                       onClick={() => setSelectedCategory(category)}
                     >
                       {category}
@@ -235,7 +240,7 @@ export default function ProjectsPage() {
                   {allTags.map((tag) => (
                     <DropdownMenuItem
                       key={tag}
-                      className={selectedTags.includes(tag) ? "text-purple-400" : ""}
+                      className={`cursor-pointer hover:bg-purple-900/30 ${selectedTags.includes(tag) ? "text-purple-400 font-medium" : "text-gray-200"}`}
                       onClick={() => toggleTag(tag)}
                     >
                       {tag} {selectedTags.includes(tag) && "✓"}
@@ -252,7 +257,7 @@ export default function ProjectsPage() {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="bg-slate-900 border-purple-800">
                   <DropdownMenuItem
-                    className={!selectedYear ? "text-purple-400" : ""}
+                    className={`cursor-pointer hover:bg-purple-900/30 ${!selectedYear ? "text-purple-400 font-medium" : "text-gray-200"}`}
                     onClick={() => setSelectedYear(null)}
                   >
                     All Years
@@ -260,7 +265,7 @@ export default function ProjectsPage() {
                   {allYears.map((year) => (
                     <DropdownMenuItem
                       key={year}
-                      className={selectedYear === year ? "text-purple-400" : ""}
+                      className={`cursor-pointer hover:bg-purple-900/30 ${selectedYear === year ? "text-purple-400 font-medium" : "text-gray-200"}`}
                       onClick={() => setSelectedYear(year)}
                     >
                       {year}
@@ -273,68 +278,68 @@ export default function ProjectsPage() {
                 Clear
               </Button>
             </div>
-          </div>
 
-          {/* Active filters display */}
-          {(selectedCategory || selectedTags.length > 0 || selectedYear) && (
-            <div className="flex flex-wrap gap-2 mb-4">
-              {selectedCategory && (
-                <Badge
-                  variant="secondary"
-                  className="bg-purple-900/50 hover:bg-purple-900/70"
-                  onClick={() => setSelectedCategory(null)}
-                >
-                  {selectedCategory} ×
-                </Badge>
-              )}
-              {selectedTags.map((tag) => (
-                <Badge
-                  key={tag}
-                  variant="secondary"
-                  className="bg-indigo-900/50 hover:bg-indigo-900/70"
-                  onClick={() => toggleTag(tag)}
-                >
-                  {tag} ×
-                </Badge>
-              ))}
-              {selectedYear && (
-                <Badge
-                  variant="secondary"
-                  className="bg-blue-900/50 hover:bg-blue-900/70"
-                  onClick={() => setSelectedYear(null)}
-                >
-                  {selectedYear} ×
-                </Badge>
-              )}
-            </div>
-          )}
+            {/* Active filters display */}
+            {(selectedCategory || selectedTags.length > 0 || selectedYear) && (
+              <div className="flex flex-wrap gap-2">
+                {selectedCategory && (
+                  <Badge
+                    variant="secondary"
+                    className="bg-purple-900/50 hover:bg-purple-900/70"
+                    onClick={() => setSelectedCategory(null)}
+                  >
+                    {selectedCategory} ×
+                  </Badge>
+                )}
+                {selectedTags.map((tag) => (
+                  <Badge
+                    key={tag}
+                    variant="secondary"
+                    className="bg-indigo-900/50 hover:bg-indigo-900/70"
+                    onClick={() => toggleTag(tag)}
+                  >
+                    {tag} ×
+                  </Badge>
+                ))}
+                {selectedYear && (
+                  <Badge
+                    variant="secondary"
+                    className="bg-blue-900/50 hover:bg-blue-900/70"
+                    onClick={() => setSelectedYear(null)}
+                  >
+                    {selectedYear} ×
+                  </Badge>
+                )}
+              </div>
+            )}
 
-          {/* View mode toggle */}
-          <div className="flex justify-between items-center">
-            <p className="text-gray-400">
-              Showing {filteredProjects.length} of {projects.length} projects
-            </p>
-            <div className="flex gap-2">
-              <Button
-                variant={viewMode === "grid" ? "default" : "outline"}
-                size="icon"
-                className={
-                  viewMode === "grid" ? "bg-purple-600 hover:bg-purple-700" : "border-purple-700 text-purple-300"
-                }
-                onClick={() => setViewMode("grid")}
-              >
-                <Layers className="h-4 w-4" />
-              </Button>
-              <Button
-                variant={viewMode === "list" ? "default" : "outline"}
-                size="icon"
-                className={
-                  viewMode === "list" ? "bg-purple-600 hover:bg-purple-700" : "border-purple-700 text-purple-300"
-                }
-                onClick={() => setViewMode("list")}
-              >
-                <Layers className="h-4 w-4 rotate-90" />
-              </Button>
+            {/* View mode toggle and count */}
+            <div className="flex flex-col sm:flex-row justify-between items-center gap-4 pt-2 border-t border-purple-900/30">
+              <p className="text-gray-400 text-sm">
+                Showing {filteredProjects.length} of {projects.length} projects
+              </p>
+              <div className="flex gap-2">
+                <Button
+                  variant={viewMode === "grid" ? "default" : "outline"}
+                  size="icon"
+                  className={
+                    viewMode === "grid" ? "bg-purple-600 hover:bg-purple-700" : "border-purple-700 text-purple-300"
+                  }
+                  onClick={() => setViewMode("grid")}
+                >
+                  <Layers className="h-4 w-4" />
+                </Button>
+                <Button
+                  variant={viewMode === "list" ? "default" : "outline"}
+                  size="icon"
+                  className={
+                    viewMode === "list" ? "bg-purple-600 hover:bg-purple-700" : "border-purple-700 text-purple-300"
+                  }
+                  onClick={() => setViewMode("list")}
+                >
+                  <Layers className="h-4 w-4 rotate-90" />
+                </Button>
+              </div>
             </div>
           </div>
         </section>
@@ -389,7 +394,7 @@ export default function ProjectsPage() {
                               </Badge>
                             ))}
                           </div>
-                          <Badge variant="outline" className="border-purple-500/50">
+                          <Badge variant="outline" className="border-purple-500/50 bg-purple-500/10 text-purple-300">
                             {new Date(project.created_at).getFullYear()}
                           </Badge>
                         </div>
@@ -472,7 +477,7 @@ export default function ProjectsPage() {
                                   </Badge>
                                 ))}
                               </div>
-                              <Badge variant="outline" className="border-purple-500/50">
+                              <Badge variant="outline" className="border-purple-500/50 bg-purple-500/10 text-purple-300">
                                 {new Date(project.created_at).getFullYear()}
                               </Badge>
                             </div>
@@ -574,7 +579,7 @@ export default function ProjectsPage() {
               <DialogHeader>
                 <div className="flex justify-between items-center">
                   <DialogTitle className="text-2xl font-bold">{selectedProject.name}</DialogTitle>
-                  <Badge variant="outline" className="border-purple-500/50">
+                  <Badge variant="outline" className="border-purple-500/50 bg-purple-500/10 text-purple-300">
                     {new Date(selectedProject.created_at).getFullYear()}
                   </Badge>
                 </div>

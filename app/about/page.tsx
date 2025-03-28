@@ -255,16 +255,18 @@ export default function AboutPage() {
             />
 
             {/* Header with navigation */}
-            <header className="relative z-10 p-6 flex justify-between items-center border-b border-purple-900/30">
+            <header className="relative z-10 p-4 md:p-6 flex justify-between items-center border-b border-purple-900/30 bg-black/20 backdrop-blur-sm">
                 <Link href="/" className="flex items-center gap-2 text-purple-300 hover:text-purple-200 transition-colors">
                     <ArrowLeft className="h-5 w-5" />
-                    <span>Back to Home</span>
+                    <span className="hidden sm:inline">Back to Home</span>
                 </Link>
-                <div className="flex items-center gap-2">
-                    <Moon className="text-purple-300" />
-                    <h1 className="text-2xl font-bold">About Me</h1>
+                <div className="flex items-center gap-3">
+                    <Moon className="h-5 w-5 text-purple-400" />
+                    <h1 className="text-xl md:text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-300 to-blue-400">
+                        About Me
+                    </h1>
                 </div>
-                <div className="w-[100px]"></div> {/* Spacer for centering */}
+                <div className="w-[72px] sm:w-[100px]"></div> {/* Responsive spacer */}
             </header>
 
             {/* Main content */}

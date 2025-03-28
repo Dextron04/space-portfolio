@@ -4,10 +4,9 @@ import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
 import { ChevronDown, Github, Linkedin, Moon, Star } from "lucide-react"
 import Link from "next/link"
-import Image from "next/image"
 
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card } from "@/components/ui/card"
 
 export default function Portfolio() {
   const [text, setText] = useState("")
@@ -88,13 +87,13 @@ export default function Portfolio() {
 
       {/* Header */}
       <header className="relative z-10 flex flex-col items-center justify-center min-h-screen">
-        <nav className="fixed top-0 left-0 right-0 p-6 flex justify-between items-center">
+        <nav className="fixed top-0 left-0 right-0 p-4 md:p-6 flex justify-between items-center bg-black/20 backdrop-blur-sm border-b border-purple-900/30">
           <div className="flex items-center gap-2">
-            <Moon className="text-purple-300" />
-            <span className="font-bold text-xl">Portfolio</span>
+            <Moon className="text-purple-400 h-5 w-5" />
+            <span className="font-bold text-xl bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-300 to-blue-400">Portfolio</span>
           </div>
           <div className="hidden md:flex gap-6">
-            <Link href="#about" className="hover:text-purple-300 transition-colors">
+            <Link href="/about" className="hover:text-purple-300 transition-colors">
               About
             </Link>
             <Link href="/projects" className="hover:text-purple-300 transition-colors">
@@ -108,39 +107,55 @@ export default function Portfolio() {
             </Link>
           </div>
           <div className="flex gap-4">
-            <Button variant="ghost" size="icon" className="text-white hover:text-purple-300">
-              <Github className="h-5 w-5" />
-            </Button>
-            <Button variant="ghost" size="icon" className="text-white hover:text-purple-300">
-              <Linkedin className="h-5 w-5" />
-            </Button>
+            <Link href="https://github.com/Dextron04" target="_blank" rel="noopener noreferrer">
+              <Button variant="ghost" size="icon" className="text-purple-300 hover:text-purple-200">
+                <Github className="h-5 w-5" />
+              </Button>
+            </Link>
+            <Link href="https://www.linkedin.com/in/tushin-kulshreshtha-2522b8231/" target="_blank" rel="noopener noreferrer">
+              <Button variant="ghost" size="icon" className="text-purple-300 hover:text-purple-200">
+                <Linkedin className="h-5 w-5" />
+              </Button>
+            </Link>
           </div>
         </nav>
 
-        <div className="text-center px-4">
-          <h1 className="text-4xl md:text-7xl font-bold mb-4">
+        <div className="text-center px-4 space-y-6">
+          <h1 className="text-4xl md:text-7xl font-bold">
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-300 to-blue-400">
               {text}
             </span>
             <span className="animate-pulse">|</span>
           </h1>
-          <h2 className="text-xl md:text-2xl text-gray-300 mb-8">Software Developer & Space Enthusiast</h2>
-          <Button className="bg-purple-600 hover:bg-purple-700 text-white">View My Work</Button>
+          <h2 className="text-xl md:text-2xl text-gray-300">Software Developer & Space Enthusiast</h2>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
+            <Link href="/projects">
+              <Button className="bg-purple-600 hover:bg-purple-700 text-white w-full sm:w-auto">
+                View My Work
+              </Button>
+            </Link>
+            <Link href="/about">
+              <Button variant="outline" className="border-purple-600 text-purple-300 hover:bg-purple-600/20 w-full sm:w-auto">
+                About Me
+              </Button>
+            </Link>
+          </div>
         </div>
 
         <motion.div
-          className="absolute bottom-10"
+          className="absolute bottom-10 cursor-pointer"
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
+          onClick={() => document.getElementById('featured')?.scrollIntoView({ behavior: 'smooth' })}
         >
-          <ChevronDown className="h-8 w-8 text-gray-400" />
+          <ChevronDown className="h-8 w-8 text-purple-300" />
         </motion.div>
       </header>
 
       {/* Main content */}
       <main className="relative z-10 max-w-7xl mx-auto px-4 py-12 pb-24 md:pb-12">
         {/* About Section */}
-        <section id="about" className="relative z-10 py-20 px-4 md:px-10 max-w-6xl mx-auto">
+        <section id="about" className="relative z-10 py-20">
           <h2 className="text-3xl md:text-4xl font-bold mb-12 flex items-center">
             <Star className="mr-2 text-purple-400" /> About Me
           </h2>
@@ -154,7 +169,7 @@ export default function Portfolio() {
               </p>
             </div>
             <div className="bg-gradient-to-br from-indigo-900/30 to-purple-900/30 p-6 rounded-lg border border-purple-800/30 backdrop-blur-sm">
-              <h3 className="text-xl font-semibold mb-4 text-purple-300">Quick Facts</h3>
+              <h3 className="text-xl font-semibold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300">Quick Facts</h3>
               <ul className="space-y-2 text-gray-300">
                 <li className="flex items-start">
                   <span className="mr-2">•</span> Based in San Francisco, California
@@ -185,77 +200,142 @@ export default function Portfolio() {
           </div>
         </section>
 
-
-        {/* Projects Section */}
-        <section id="projects" className="relative z-10 py-20 px-4 md:px-10 max-w-6xl mx-auto">
+        {/* Skills Section */}
+        <section id="skills" className="relative z-10 py-20">
           <h2 className="text-3xl md:text-4xl font-bold mb-12 flex items-center">
-            <Star className="mr-2 text-purple-400" /> My Projects
+            <Star className="mr-2 text-purple-400" /> Skills & Technologies
           </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[1, 2, 3].map((project) => (
-              <Card key={project} className="bg-slate-900/60 border-purple-900/50 backdrop-blur-sm overflow-hidden">
-                <div className="h-48 bg-gradient-to-br from-indigo-800/20 to-purple-800/20 flex items-center justify-center">
-                  <Image
-                    src={`/placeholder.svg?height=200&width=400`}
-                    alt={`Project ${project}`}
-                    className="object-cover"
-                    layout="fill"
-                  />
-                </div>
-                <CardHeader>
-                  <CardTitle className="text-white">Project {project}</CardTitle>
-                  <CardDescription className="text-gray-400">A brief description of this amazing project</CardDescription>
-                </CardHeader>
-                <CardContent className="text-gray-300">
-                  <p>
-                    This project showcases my skills in React, Next.js, and Tailwind CSS. It features a responsive design
-                    and interactive elements.
-                  </p>
-                </CardContent>
-                <CardFooter className="flex justify-between">
-                  <Button variant="outline" className="border-purple-700 text-purple-300 hover:bg-purple-900/30">
-                    View Demo
-                  </Button>
-                  <Button variant="ghost" className="text-gray-300 hover:text-purple-300">
-                    <Github className="h-5 w-5 mr-2" /> Code
-                  </Button>
-                </CardFooter>
-              </Card>
-            ))}
+
+          {/* Categories */}
+          <div className="space-y-8">
+            {/* Frontend */}
+            <div className="bg-slate-900/60 border border-purple-900/30 rounded-lg p-6 backdrop-blur-sm">
+              <h3 className="text-xl font-semibold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300">
+                Frontend Development
+              </h3>
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                {[
+                  { name: "React", level: "95%" },
+                  { name: "Next.js", level: "90%" },
+                  { name: "TypeScript", level: "85%" },
+                  { name: "Tailwind", level: "90%" },
+                ].map((skill) => (
+                  <div
+                    key={skill.name}
+                    className="group relative bg-gradient-to-br from-slate-900/80 to-indigo-900/50 p-4 rounded-lg border border-purple-800/30 hover:border-purple-600/50 transition-all duration-300"
+                  >
+                    <div className="text-base md:text-lg font-medium text-gray-200 mb-2">{skill.name}</div>
+                    <div className="h-1.5 bg-gray-700/50 rounded-full overflow-hidden">
+                      <div
+                        className="h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full transform origin-left transition-transform duration-500 ease-out group-hover:scale-x-110"
+                        style={{ width: skill.level }}
+                      ></div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Backend */}
+            <div className="bg-slate-900/60 border border-purple-900/30 rounded-lg p-6 backdrop-blur-sm">
+              <h3 className="text-xl font-semibold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-300">
+                Backend Development
+              </h3>
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                {[
+                  { name: "Python", level: "90%" },
+                  { name: "Node.js", level: "85%" },
+                  { name: "Django", level: "80%" },
+                  { name: "Spring Boot", level: "75%" },
+                ].map((skill) => (
+                  <div
+                    key={skill.name}
+                    className="group relative bg-gradient-to-br from-slate-900/80 to-indigo-900/50 p-4 rounded-lg border border-purple-800/30 hover:border-purple-600/50 transition-all duration-300"
+                  >
+                    <div className="text-base md:text-lg font-medium text-gray-200 mb-2">{skill.name}</div>
+                    <div className="h-1.5 bg-gray-700/50 rounded-full overflow-hidden">
+                      <div
+                        className="h-full bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full transform origin-left transition-transform duration-500 ease-out group-hover:scale-x-110"
+                        style={{ width: skill.level }}
+                      ></div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Tools & Technologies */}
+            <div className="bg-slate-900/60 border border-purple-900/30 rounded-lg p-6 backdrop-blur-sm">
+              <h3 className="text-xl font-semibold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-emerald-300">
+                Tools & Technologies
+              </h3>
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                {[
+                  { name: "AWS", level: "85%" },
+                  { name: "Docker", level: "80%" },
+                  { name: "Git", level: "90%" },
+                  { name: "REST APIs", level: "85%" },
+                ].map((skill) => (
+                  <div
+                    key={skill.name}
+                    className="group relative bg-gradient-to-br from-slate-900/80 to-indigo-900/50 p-4 rounded-lg border border-purple-800/30 hover:border-purple-600/50 transition-all duration-300"
+                  >
+                    <div className="text-base md:text-lg font-medium text-gray-200 mb-2">{skill.name}</div>
+                    <div className="h-1.5 bg-gray-700/50 rounded-full overflow-hidden">
+                      <div
+                        className="h-full bg-gradient-to-r from-teal-500 to-emerald-500 rounded-full transform origin-left transition-transform duration-500 ease-out group-hover:scale-x-110"
+                        style={{ width: skill.level }}
+                      ></div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </section>
 
-        {/* Skills Section */}
-        <section id="skills" className="relative z-10 py-20 px-4 md:px-10 max-w-6xl mx-auto">
+        {/* Contact Section */}
+        <section id="contact" className="relative z-10 py-20">
           <h2 className="text-3xl md:text-4xl font-bold mb-12 flex items-center">
-            <Star className="mr-2 text-purple-400" /> My Skills
+            <Star className="mr-2 text-purple-400" /> Get In Touch
           </h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {["JavaScript", "TypeScript", "React", "Next.js", "Node.js", "Tailwind CSS", "GraphQL", "MongoDB"].map(
-              (skill) => (
-                <div
-                  key={skill}
-                  className="bg-gradient-to-br from-slate-900/80 to-indigo-900/50 p-4 rounded-lg border border-purple-800/30 backdrop-blur-sm text-center"
-                >
-                  <div className="text-lg font-medium text-gray-200">{skill}</div>
-                </div>
-              ),
-            )}
-          </div>
+          <Card className="bg-slate-900/60 border-purple-900/50 backdrop-blur-sm p-6 md:p-8">
+            <div className="text-center max-w-2xl mx-auto">
+              <h3 className="text-2xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-300 to-blue-400">
+                Let&apos;s Connect!
+              </h3>
+              <p className="text-gray-300 mb-8">
+                Whether you want to discuss a project, ask a question, or just say hi,
+                feel free to reach out to me through any of these platforms.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link href="https://github.com/Dextron04" target="_blank" rel="noopener noreferrer">
+                  <Button className="bg-purple-600 hover:bg-purple-700 w-full sm:w-auto">
+                    <Github className="h-5 w-5 mr-2" /> GitHub
+                  </Button>
+                </Link>
+                <Link href="https://www.linkedin.com/in/tushin-kulshreshtha-2522b8231/" target="_blank" rel="noopener noreferrer">
+                  <Button variant="outline" className="border-purple-600 text-purple-300 hover:bg-purple-600/20 w-full sm:w-auto">
+                    <Linkedin className="h-5 w-5 mr-2" /> LinkedIn
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          </Card>
         </section>
       </main>
 
       {/* Footer */}
-      <footer className="relative z-10 py-8 border-t border-purple-900/30 mt-20">
-        <div className="max-w-6xl mx-auto px-4 md:px-10 flex flex-col md:flex-row justify-between items-center">
-          <div className="text-gray-400 mb-4 md:mb-0">© {new Date().getFullYear()} Tushin Kulshreshtha. All rights reserved.</div>
+      <footer className="relative z-10 py-8 border-t border-purple-900/30">
+        <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="text-gray-400 text-sm text-center md:text-left">
+            © {new Date().getFullYear()} Tushin Kulshreshtha. All rights reserved.
+          </div>
           <div className="flex gap-6 text-gray-400">
-            <Link href="#" className="hover:text-purple-300 transition-colors">
-              Privacy Policy
-            </Link>
-            <Link href="#" className="hover:text-purple-300 transition-colors">
-              Terms of Service
-            </Link>
+            <Link href="/about" className="hover:text-purple-300 transition-colors">About</Link>
+            <Link href="/projects" className="hover:text-purple-300 transition-colors">Projects</Link>
+            <Link href="#skills" className="hover:text-purple-300 transition-colors">Skills</Link>
+            <Link href="#contact" className="hover:text-purple-300 transition-colors">Contact</Link>
           </div>
         </div>
       </footer>
