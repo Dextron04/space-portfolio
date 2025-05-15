@@ -1,38 +1,36 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { ChevronDown, Github, Linkedin, Moon, Star } from "lucide-react"
 import Link from "next/link"
 
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
+import ASCIIText from "@/components/ASCIIText"
+
+type Star = {
+  width: string;
+  height: string;
+  top: string;
+  left: string;
+  duration: number;
+};
 
 export default function Portfolio() {
-  const [text, setText] = useState("")
-  const [fullText] = useState("Tushin Kulshreshtha") // Replace with your name
-  const [index, setIndex] = useState(0)
-  const [stars] = useState(() =>
-    [...Array(100)].map(() => ({
-      width: Math.random() * 3 + 1 + "px",
-      height: Math.random() * 3 + 1 + "px",
-      top: Math.random() * 100 + "%",
-      left: Math.random() * 100 + "%",
-      duration: Math.random() * 5 + 3,
-    }))
-  )
+  const [stars, setStars] = useState<Star[]>([])
 
-  // Typewriter effect
   useEffect(() => {
-    if (index < fullText.length) {
-      const timeout = setTimeout(() => {
-        setText((prevText) => prevText + fullText[index])
-        setIndex((prevIndex) => prevIndex + 1)
-      }, 150)
-
-      return () => clearTimeout(timeout)
-    }
-  }, [index, fullText])
+    setStars(
+      [...Array(100)].map(() => ({
+        width: Math.random() * 3 + 1 + "px",
+        height: Math.random() * 3 + 1 + "px",
+        top: Math.random() * 100 + "%",
+        left: Math.random() * 100 + "%",
+        duration: Math.random() * 5 + 3,
+      }))
+    )
+  }, [])
 
   return (
     <div className="relative min-h-screen bg-gradient-to-b from-black via-slate-900 to-indigo-950 text-white overflow-hidden">
@@ -121,12 +119,9 @@ export default function Portfolio() {
         </nav>
 
         <div className="text-center px-4 space-y-6">
-          <h1 className="text-4xl md:text-7xl font-bold">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-300 to-blue-400">
-              {text}
-            </span>
-            <span className="animate-pulse">|</span>
-          </h1>
+          <div className="relative w-full h-64 md:h-96 flex items-center justify-center">
+            <ASCIIText text="Tushin" asciiFontSize={8} textFontSize={200} textColor="#fdf9f3" planeBaseHeight={5} enableWaves={false} />
+          </div>
           <h2 className="text-xl md:text-2xl text-gray-300">Software Developer & Space Enthusiast</h2>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
             <Link href="/projects">
