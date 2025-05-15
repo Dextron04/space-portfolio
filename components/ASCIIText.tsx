@@ -423,7 +423,11 @@ class CanvAscii {
         this.textCanvas.render();
         this.texture.needsUpdate = true;
 
-        this.mesh.material.uniforms.uTime.value = Math.sin(time);
+        // Fix: assert material as ShaderMaterial and handle array case
+        const material = Array.isArray(this.mesh.material)
+            ? this.mesh.material[0]
+            : this.mesh.material;
+        (material as THREE.ShaderMaterial).uniforms.uTime.value = Math.sin(time);
 
         this.updateRotation();
         this.filter.render(this.scene, this.camera);
@@ -450,8 +454,8 @@ class CanvAscii {
                 const material = mesh.material as THREE.Material;
                 const geometry = mesh.geometry as THREE.BufferGeometry;
                 // Dispose material properties if needed
-                Object.keys(material).forEach((key) => {
-                    const matProp = (material as Record<string, unknown>)[key];
+                Object.keys(material as unknown as Record<string, unknown>).forEach((key) => {
+                    const matProp = (material as unknown as Record<string, unknown>)[key];
                     if (matProp && typeof matProp === 'object' && 'dispose' in matProp && typeof (matProp as { dispose: () => void }).dispose === 'function') {
                         (matProp as { dispose: () => void }).dispose();
                     }
@@ -533,7 +537,6 @@ export default function ASCIIText({
                 height: '100%'
             }}
         >
-            {/* Inline style or move to global CSS */}
             <style>{`
         @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&display=swap');
 
@@ -576,4 +579,4 @@ export default function ASCIIText({
       `}</style>
         </div>
     );
-} 
+}
