@@ -12,6 +12,7 @@ import { Badge } from "@/components/ui/badge"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Project, fetchGitHubProjects } from "@/lib/github"
+import { toKebabCase } from '@/lib/utils'
 
 const GITHUB_USERNAME = "Dextron04"
 
@@ -408,13 +409,16 @@ export default function ProjectsPage() {
                           ))}
                         </div>
                         <div className="flex justify-between">
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            className="border-purple-700 text-purple-300 hover:bg-purple-900/30"
-                          >
-                            Details
-                          </Button>
+                          <Link href={`/projects/${toKebabCase(project.name)}`} passHref legacyBehavior>
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="border-purple-700 text-purple-300 hover:bg-purple-900/30"
+                              onClick={e => e.stopPropagation()}
+                            >
+                              Details
+                            </Button>
+                          </Link>
                           <div className="flex gap-2">
                             <Button
                               variant="ghost"
@@ -515,6 +519,16 @@ export default function ProjectsPage() {
                               </Badge>
                             ))}
                           </div>
+                          <Link href={`/projects/${toKebabCase(project.name)}`} passHref legacyBehavior>
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="border-purple-700 text-purple-300 hover:bg-purple-900/30 mt-2"
+                              onClick={e => e.stopPropagation()}
+                            >
+                              Details
+                            </Button>
+                          </Link>
                         </div>
                       </div>
                     </motion.div>
