@@ -8,6 +8,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import ASCIIText from "@/components/ASCIIText"
+import ContactForm from "@/components/ContactForm"
 
 type Star = {
   width: string;
@@ -303,7 +304,7 @@ export default function Portfolio() {
                 Whether you want to discuss a project, ask a question, or just say hi,
                 feel free to reach out to me through any of these platforms.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
                 <Link href="https://github.com/Dextron04" target="_blank" rel="noopener noreferrer">
                   <Button className="bg-purple-600 hover:bg-purple-700 w-full sm:w-auto">
                     <Github className="h-5 w-5 mr-2" /> GitHub
@@ -315,6 +316,7 @@ export default function Portfolio() {
                   </Button>
                 </Link>
               </div>
+              <ContactForm />
             </div>
           </Card>
         </section>

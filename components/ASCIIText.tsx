@@ -1,3 +1,4 @@
+"use client"
 import { useRef, useEffect } from 'react';
 import * as THREE from 'three';
 // If you see a type error for 'three', run: npm i --save-dev @types/three
@@ -121,9 +122,9 @@ class AsciiFilter {
         this.context.font = `${this.fontSize}px ${this.fontFamily}`;
         const charWidth = this.context.measureText('A').width;
 
-        this.cols = Math.floor(
+        this.cols = Math.ceil(
             this.width / (this.fontSize * (charWidth / this.fontSize))
-        );
+        ) + 2;
         this.rows = Math.floor(this.height / this.fontSize);
 
         this.canvas.width = this.cols;
