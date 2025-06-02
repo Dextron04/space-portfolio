@@ -11,22 +11,21 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         return res.status(400).json({ error: 'Missing required fields' });
     }
 
-    // SMTP config from .env.local
+    // Gmail SMTP setup
     const transporter = nodemailer.createTransport({
-        host: process.env.EMAIL_HOST,
-        port: Number(process.env.EMAIL_PORT),
-        secure: false, // true for port 465, false for 587
+        service: 'gmail',
         auth: {
-            user: process.env.EMAIL_USER,
-            pass: process.env.EMAIL_PASS,
+            user: process.env.GMAIL_USER,       // your Gmail address (e.g. yourname@gmail.com)
+            pass: process.env.GMAIL_APP_PASS,   // Gmail App Password (not your Gmail password)
         },
     });
 
     try {
-        await transporter.verify(); // Ensure SMTP config is valid
+        await transporter.verify();
+
         await transporter.sendMail({
-            from: process.env.EMAIL_USER,
-            to: process.env.EMAIL_TO,
+            from: `"Dextron Portfolio" <noreply@dextron04.in>`, // verified sender
+            to: process.env.EMAIL_TO, // your own email to receive messages
             subject: `Contact Form Submission from ${name}`,
             text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
             html: `
@@ -46,10 +45,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                   <div style="background: #f3f4f6; padding: 16px; border-radius: 8px; color: #222; white-space: pre-line;">${message}</div>
                 </div>
             `,
-            replyTo: email,
+            replyTo: email, // if you want to reply directly to the user
         });
+
         return res.status(200).json({ success: true });
-    } catch {
+    } catch (error) {
+        console.error('Error sending email:', error);
         return res.status(500).json({ error: 'Failed to send email' });
     }
 } 
