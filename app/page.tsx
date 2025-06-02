@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import ASCIIText from "@/components/ASCIIText"
 import ContactForm from "@/components/ContactForm"
+import SkillsSection from "@/components/SkillsSection"
 
 type Star = {
   width: string;
@@ -197,98 +198,7 @@ export default function Portfolio() {
         </section>
 
         {/* Skills Section */}
-        <section id="skills" className="relative z-10 py-20">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 flex items-center">
-            <Star className="mr-2 text-purple-400" /> Skills & Technologies
-          </h2>
-
-          {/* Categories */}
-          <div className="space-y-8">
-            {/* Frontend */}
-            <div className="bg-slate-900/60 border border-purple-900/30 rounded-lg p-6 backdrop-blur-sm">
-              <h3 className="text-xl font-semibold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300">
-                Frontend Development
-              </h3>
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                {[
-                  { name: "React", level: "95%" },
-                  { name: "Next.js", level: "90%" },
-                  { name: "TypeScript", level: "85%" },
-                  { name: "Tailwind", level: "90%" },
-                ].map((skill) => (
-                  <div
-                    key={skill.name}
-                    className="group relative bg-gradient-to-br from-slate-900/80 to-indigo-900/50 p-4 rounded-lg border border-purple-800/30 hover:border-purple-600/50 transition-all duration-300"
-                  >
-                    <div className="text-base md:text-lg font-medium text-gray-200 mb-2">{skill.name}</div>
-                    <div className="h-1.5 bg-gray-700/50 rounded-full overflow-hidden">
-                      <div
-                        className="h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full transform origin-left transition-transform duration-500 ease-out group-hover:scale-x-110"
-                        style={{ width: skill.level }}
-                      ></div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Backend */}
-            <div className="bg-slate-900/60 border border-purple-900/30 rounded-lg p-6 backdrop-blur-sm">
-              <h3 className="text-xl font-semibold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-300">
-                Backend Development
-              </h3>
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                {[
-                  { name: "Python", level: "90%" },
-                  { name: "Node.js", level: "85%" },
-                  { name: "Django", level: "80%" },
-                  { name: "Spring Boot", level: "75%" },
-                ].map((skill) => (
-                  <div
-                    key={skill.name}
-                    className="group relative bg-gradient-to-br from-slate-900/80 to-indigo-900/50 p-4 rounded-lg border border-purple-800/30 hover:border-purple-600/50 transition-all duration-300"
-                  >
-                    <div className="text-base md:text-lg font-medium text-gray-200 mb-2">{skill.name}</div>
-                    <div className="h-1.5 bg-gray-700/50 rounded-full overflow-hidden">
-                      <div
-                        className="h-full bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full transform origin-left transition-transform duration-500 ease-out group-hover:scale-x-110"
-                        style={{ width: skill.level }}
-                      ></div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Tools & Technologies */}
-            <div className="bg-slate-900/60 border border-purple-900/30 rounded-lg p-6 backdrop-blur-sm">
-              <h3 className="text-xl font-semibold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-emerald-300">
-                Tools & Technologies
-              </h3>
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                {[
-                  { name: "AWS", level: "85%" },
-                  { name: "Docker", level: "80%" },
-                  { name: "Git", level: "90%" },
-                  { name: "REST APIs", level: "85%" },
-                ].map((skill) => (
-                  <div
-                    key={skill.name}
-                    className="group relative bg-gradient-to-br from-slate-900/80 to-indigo-900/50 p-4 rounded-lg border border-purple-800/30 hover:border-purple-600/50 transition-all duration-300"
-                  >
-                    <div className="text-base md:text-lg font-medium text-gray-200 mb-2">{skill.name}</div>
-                    <div className="h-1.5 bg-gray-700/50 rounded-full overflow-hidden">
-                      <div
-                        className="h-full bg-gradient-to-r from-teal-500 to-emerald-500 rounded-full transform origin-left transition-transform duration-500 ease-out group-hover:scale-x-110"
-                        style={{ width: skill.level }}
-                      ></div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
+        <SkillsSection />
 
         {/* Contact Section */}
         <section id="contact" className="relative z-10 py-20">
