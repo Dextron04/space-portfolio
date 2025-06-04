@@ -409,7 +409,7 @@ export default function ProjectsPage() {
                           ))}
                         </div>
                         <div className="flex justify-between">
-                          <Link href={`/projects/${toKebabCase(project.name)}`} passHref legacyBehavior>
+                          <Link href={`/projects/${toKebabCase(project.name)}`}>
                             <Button
                               variant="outline"
                               size="sm"
@@ -519,7 +519,7 @@ export default function ProjectsPage() {
                               </Badge>
                             ))}
                           </div>
-                          <Link href={`/projects/${toKebabCase(project.name)}`} passHref legacyBehavior>
+                          <Link href={`/projects/${toKebabCase(project.name)}`}>
                             <Button
                               variant="outline"
                               size="sm"

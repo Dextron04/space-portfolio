@@ -1,3 +1,5 @@
+"use client"
+
 import matter from 'gray-matter';
 import ReactMarkdown from 'react-markdown';
 import type { GitHubRepo as BaseGitHubRepo } from '@/lib/github';
@@ -5,6 +7,8 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ArrowLeft, Moon, Star } from 'lucide-react';
+import Image from 'next/image';
+import { useState, useEffect } from 'react';
 
 interface Frontmatter {
     title?: string;
@@ -26,55 +30,95 @@ function toKebabCase(str: string): string {
 
 const GITHUB_USERNAME = 'Dextron04';
 
-export default async function ProjectPage({ params }: { params: { slug: string } }) {
-    const { slug } = params;
+export default function Page({ params }: { params: Promise<{ slug: string }> }) {
+    const [slug, setSlug] = useState<string>('');
 
-    // 1. Fetch all repos for the user
-    let repo: GitHubRepoWithBranch | undefined = undefined;
-    let defaultBranch = 'main';
-    try {
-        const reposRes = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?per_page=100`);
-        if (!reposRes.ok) throw new Error('Could not fetch repos');
-        const repos: GitHubRepoWithBranch[] = await reposRes.json();
-        // Find the repo whose kebab-case name matches the slug
-        repo = repos.find((r) => toKebabCase(r.name) === slug);
-        if (!repo) throw new Error('Repo not found');
-        defaultBranch = repo.default_branch || 'main';
-    } catch {
+    const [state, setState] = useState({
+        repo: null as GitHubRepoWithBranch | null,
+        defaultBranch: 'main',
+        fileContent: '',
+        data: {} as Frontmatter,
+        content: '',
+        found: false,
+        loading: true,
+        error: ''
+    });
+
+    // Resolve params first
+    useEffect(() => {
+        params.then((resolvedParams) => {
+            setSlug(resolvedParams.slug);
+        });
+    }, [params]);
+
+    useEffect(() => {
+        if (!slug) return;
+
+        let isMounted = true;
+        (async () => {
+            try {
+                const reposRes = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?per_page=100`);
+                if (!reposRes.ok) throw new Error('Could not fetch repos');
+                const repos: GitHubRepoWithBranch[] = await reposRes.json();
+                const repo = repos.find((r) => toKebabCase(r.name) === slug);
+                if (!repo) throw new Error('Repo not found');
+                const defaultBranch = repo.default_branch || 'main';
+                let fileContent = '';
+                let data: Frontmatter = {};
+                let content = '';
+                let found = false;
+                const possiblePaths = [
+                    `content/projects/${slug}.md`,
+                    'README.md',
+                ];
+                for (const path of possiblePaths) {
+                    const githubRawUrl = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${repo.name}/${defaultBranch}/${path}`;
+                    const res = await fetch(githubRawUrl);
+                    if (!res.ok) continue;
+                    fileContent = await res.text();
+                    const parsed = matter(fileContent);
+                    data = parsed.data as Frontmatter;
+                    content = parsed.content;
+                    found = true;
+                    break;
+                }
+                if (isMounted) {
+                    setState({ repo, defaultBranch, fileContent, data, content, found, loading: false, error: found ? '' : 'Project markdown not found.' });
+                }
+            } catch (err: unknown) {
+                let message = 'Project not found.';
+                if (typeof err === 'object' && err && 'message' in err && typeof (err as { message?: unknown }).message === 'string') {
+                    message = (err as { message: string }).message;
+                }
+                if (isMounted) {
+                    setState((prev) => ({ ...prev, loading: false, error: message }));
+                }
+            }
+        })();
+        return () => { isMounted = false; };
+    }, [slug]);
+
+    if (state.loading) {
         return (
             <div className="relative min-h-screen bg-gradient-to-b from-black via-slate-900 to-indigo-950 text-white overflow-hidden flex items-center justify-center">
-                <div className="prose mx-auto py-8 text-center text-red-500">Project not found.</div>
+                <div className="prose mx-auto py-8 text-center text-gray-300">Loading...</div>
             </div>
         );
     }
-
-    // 2. Try to fetch the markdown file from the repo
-    //    (first try content/projects/[slug].md, fallback to README.md)
-    let fileContent = '';
-    let data: Frontmatter = {};
-    let content = '';
-    let found = false;
-    const possiblePaths = [
-        `content/projects/${slug}.md`,
-        'README.md',
-    ];
-    for (const path of possiblePaths) {
-        const githubRawUrl = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${repo.name}/${defaultBranch}/${path}`;
-        try {
-            const res = await fetch(githubRawUrl);
-            if (!res.ok) continue;
-            fileContent = await res.text();
-            const parsed = matter(fileContent);
-            data = parsed.data as Frontmatter;
-            content = parsed.content;
-            found = true;
-            break;
-        } catch { }
-    }
-    if (!found) {
+    if (state.error) {
         return (
             <div className="relative min-h-screen bg-gradient-to-b from-black via-slate-900 to-indigo-950 text-white overflow-hidden flex items-center justify-center">
-                <div className="prose mx-auto py-8 text-center text-red-500">Project markdown not found.</div>
+                <div className="prose mx-auto py-8 text-center text-red-500">{state.error}</div>
+            </div>
+        );
+    }
+    const { repo, data, content } = state;
+
+    // Early return if repo is null (shouldn't happen due to loading state, but for type safety)
+    if (!repo) {
+        return (
+            <div className="relative min-h-screen bg-gradient-to-b from-black via-slate-900 to-indigo-950 text-white overflow-hidden flex items-center justify-center">
+                <div className="prose mx-auto py-8 text-center text-red-500">Repository not found.</div>
             </div>
         );
     }
@@ -134,7 +178,16 @@ export default async function ProjectPage({ params }: { params: { slug: string }
                                 li: (props) => <li className="mb-1" {...props} />,
                                 strong: (props) => <strong className="font-bold text-white" {...props} />,
                                 code: (props) => <code className="bg-slate-800 px-1 py-0.5 rounded text-purple-300 font-mono" {...props} />,
-                                img: (props) => <img className="rounded-lg shadow-lg my-4 mx-auto max-w-full" {...props} />,
+                                img: (props) => (
+                                    <Image
+                                        src={(props.src as string) || ''}
+                                        alt={props.alt || ''}
+                                        width={800}
+                                        height={400}
+                                        className="rounded-lg shadow-lg my-4 mx-auto max-w-full"
+                                        style={{ height: 'auto', width: '100%' }}
+                                    />
+                                ),
                                 blockquote: (props) => <blockquote className="border-l-4 border-purple-500 pl-4 italic text-gray-400 my-4" {...props} />,
                                 hr: (props) => <hr className="my-8 border-purple-900/30" {...props} />,
                             }}
@@ -159,7 +212,7 @@ export default async function ProjectPage({ params }: { params: { slug: string }
             {/* Footer */}
             <footer className="relative z-10 py-6 border-t border-purple-900/30 mt-20">
                 <div className="max-w-7xl mx-auto px-4 flex justify-center text-gray-400 text-sm">
-                    © {new Date().getFullYear()} Tushin Kulshrestha. All projects and their assets are protected by copyright.
+                    © {new Date().getFullYear()} Tushin Kulshreshtha. All projects and their assets are protected by copyright.
                 </div>
             </footer>
         </div>
