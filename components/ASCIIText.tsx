@@ -1,7 +1,55 @@
 "use client"
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import * as THREE from 'three';
 // If you see a type error for 'three', run: npm i --save-dev @types/three
+
+// Font loading utility
+const loadFont = async (fontFamily: string, fontWeight: string = '500'): Promise<boolean> => {
+    try {
+        if ('fonts' in document) {
+            await document.fonts.load(`${fontWeight} 16px "${fontFamily}"`);
+            return true;
+        } else {
+            // Fallback for older browsers
+            return new Promise((resolve) => {
+                const testString = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                const testSize = '72px';
+                const fallbackFont = 'monospace';
+
+                const canvas = document.createElement('canvas');
+                const context = canvas.getContext('2d')!;
+
+                // Measure with fallback font
+                context.font = `${testSize} ${fallbackFont}`;
+                const fallbackWidth = context.measureText(testString).width;
+
+                // Measure with target font
+                context.font = `${testSize} "${fontFamily}", ${fallbackFont}`;
+                const targetWidth = context.measureText(testString).width;
+
+                // If widths are different, font is loaded
+                if (targetWidth !== fallbackWidth) {
+                    resolve(true);
+                } else {
+                    // Keep checking until font loads
+                    const checkFont = () => {
+                        context.font = `${testSize} "${fontFamily}", ${fallbackFont}`;
+                        const currentWidth = context.measureText(testString).width;
+                        if (currentWidth !== fallbackWidth) {
+                            resolve(true);
+                        } else {
+                            setTimeout(checkFont, 100);
+                        }
+                    };
+                    setTimeout(checkFont, 100);
+                }
+            });
+        }
+    } catch (error) {
+        console.warn('Font loading detection failed:', error);
+        return true; // Proceed anyway
+    }
+};
 
 const vertexShader = `
 varying vec2 vUv;
@@ -498,9 +546,17 @@ export default function ASCIIText({
 }: ASCIITextProps) {
     const containerRef = useRef<HTMLDivElement>(null);
     const asciiRef = useRef<CanvAscii | null>(null);
+    const [fontLoaded, setFontLoaded] = useState(false);
 
     useEffect(() => {
-        if (!containerRef.current) return;
+        // Wait for font to load before initializing
+        loadFont('IBM Plex Mono', '600').then(() => {
+            setFontLoaded(true);
+        });
+    }, []);
+
+    useEffect(() => {
+        if (!containerRef.current || !fontLoaded) return;
 
         // measure container
         const { width, height } = containerRef.current.getBoundingClientRect();
@@ -527,7 +583,7 @@ export default function ASCIIText({
                 asciiRef.current.dispose();
             }
         };
-    }, [text, asciiFontSize, textFontSize, textColor, planeBaseHeight, enableWaves]);
+    }, [text, asciiFontSize, textFontSize, textColor, planeBaseHeight, enableWaves, fontLoaded]);
 
     return (
         <div
@@ -539,7 +595,7 @@ export default function ASCIIText({
             }}
         >
             <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@600&display=swap');
 
         body {
           margin: 0;
@@ -578,6 +634,20 @@ export default function ASCIIText({
           mix-blend-mode: difference;
         }
       `}</style>
+            {!fontLoaded && (
+                <div style={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    color: '#fdf9f3',
+                    fontFamily: 'monospace',
+                    fontSize: '16px',
+                    zIndex: 10
+                }}>
+                    Loading...
+                </div>
+            )}
         </div>
     );
 }
