@@ -146,16 +146,28 @@ export default function AboutPage() {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0)
     const [showCaptcha, setShowCaptcha] = useState(false)
+    const [showPasswordModal, setShowPasswordModal] = useState(false)
+    const [passwordInput, setPasswordInput] = useState("")
+    const [passwordError, setPasswordError] = useState("")
+    const PASSWORD = "dexpass" // Change this to your desired password
     const recaptchaRef = useRef<ReCAPTCHA>(null)
 
     // Handle resume download
     const handleResumeDownload = () => {
-        console.log('Environment variable:', process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY);
-        if (!process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY) {
-            console.error('reCAPTCHA site key is missing');
-            return;
+        setShowPasswordModal(true)
+    }
+
+    // Handle password submit
+    const handlePasswordSubmit = (e: React.FormEvent) => {
+        e.preventDefault()
+        if (passwordInput === PASSWORD) {
+            setShowPasswordModal(false)
+            setPasswordInput("")
+            setPasswordError("")
+            setShowCaptcha(true)
+        } else {
+            setPasswordError("Incorrect password. Please try again.")
         }
-        setShowCaptcha(true)
     }
 
     // Handle CAPTCHA verification
@@ -500,6 +512,27 @@ export default function AboutPage() {
                             </div>
                         </div>
                     )}
+                </DialogContent>
+            </Dialog>
+
+            {/* Password Modal */}
+            <Dialog open={showPasswordModal} onOpenChange={setShowPasswordModal}>
+                <DialogContent className="bg-slate-900/95 border-purple-900/50 text-white w-[95vw] max-w-[400px] p-4 md:p-6">
+                    <DialogHeader className="mb-4">
+                        <DialogTitle className="text-lg md:text-xl font-bold text-center">Enter Password</DialogTitle>
+                    </DialogHeader>
+                    <form onSubmit={handlePasswordSubmit} className="flex flex-col items-center gap-4 w-full">
+                        <input
+                            type="password"
+                            value={passwordInput}
+                            onChange={e => setPasswordInput(e.target.value)}
+                            className="w-full rounded-md bg-slate-800/80 border border-purple-700 p-2 text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
+                            placeholder="Enter password"
+                            autoFocus
+                        />
+                        {passwordError && <div className="text-red-400 text-sm">{passwordError}</div>}
+                        <Button type="submit" className="w-full bg-purple-600 hover:bg-purple-700">Submit</Button>
+                    </form>
                 </DialogContent>
             </Dialog>
 
