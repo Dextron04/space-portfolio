@@ -47,19 +47,14 @@ const SkillsSection = () => {
                     logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
                 },
                 {
+                    name: "React Native",
+                    color: "from-blue-500/20 to-cyan-500/20",
+                    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
+                },
+                {
                     name: "Next.js",
                     color: "from-gray-400/20 to-white/20",
                     logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg"
-                },
-                {
-                    name: "TypeScript",
-                    color: "from-blue-600/20 to-blue-400/20",
-                    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"
-                },
-                {
-                    name: "Tailwind CSS",
-                    color: "from-teal-400/20 to-blue-500/20",
-                    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg"
                 },
                 {
                     name: "JavaScript",
@@ -67,9 +62,9 @@ const SkillsSection = () => {
                     logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
                 },
                 {
-                    name: "Vue.js",
-                    color: "from-green-400/20 to-emerald-400/20",
-                    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg"
+                    name: "Vite",
+                    color: "from-purple-500/20 to-yellow-400/20",
+                    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vitejs/vitejs-original.svg"
                 }
             ]
         },
@@ -82,14 +77,14 @@ const SkillsSection = () => {
                     logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
                 },
                 {
+                    name: "Java",
+                    color: "from-red-500/20 to-orange-500/20",
+                    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg"
+                },
+                {
                     name: "Node.js",
                     color: "from-green-500/20 to-green-400/20",
                     logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"
-                },
-                {
-                    name: "Django",
-                    color: "from-green-600/20 to-green-400/20",
-                    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg"
                 },
                 {
                     name: "Spring Boot",
@@ -97,19 +92,44 @@ const SkillsSection = () => {
                     logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg"
                 },
                 {
-                    name: "Express.js",
-                    color: "from-gray-500/20 to-green-500/20",
-                    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg"
+                    name: "Django",
+                    color: "from-green-600/20 to-green-400/20",
+                    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg"
                 },
                 {
-                    name: "PostgreSQL",
-                    color: "from-blue-600/20 to-indigo-500/20",
-                    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg"
+                    name: "C++",
+                    color: "from-blue-600/20 to-blue-800/20",
+                    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg"
                 }
             ]
         },
         {
-            title: "Tools & Technologies",
+            title: "Databases",
+            skills: [
+                {
+                    name: "PostgreSQL",
+                    color: "from-blue-600/20 to-indigo-500/20",
+                    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg"
+                },
+                {
+                    name: "MySQL",
+                    color: "from-blue-500/20 to-blue-400/20",
+                    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
+                },
+                {
+                    name: "MongoDB",
+                    color: "from-green-600/20 to-green-500/20",
+                    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg"
+                },
+                {
+                    name: "Azure SQL",
+                    color: "from-blue-400/20 to-blue-600/20",
+                    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg"
+                }
+            ]
+        },
+        {
+            title: "Cloud & DevOps",
             skills: [
                 {
                     name: "AWS",
@@ -127,19 +147,44 @@ const SkillsSection = () => {
                     logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg"
                 },
                 {
+                    name: "Linux",
+                    color: "from-yellow-400/20 to-gray-800/20",
+                    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg"
+                }
+            ]
+        },
+        {
+            title: "AI/ML & Specialized",
+            skills: [
+                {
+                    name: "TensorFlow",
+                    color: "from-orange-500/20 to-orange-400/20",
+                    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg"
+                },
+                {
+                    name: "PyTorch",
+                    color: "from-red-500/20 to-orange-500/20",
+                    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg"
+                },
+                {
                     name: "REST APIs",
                     color: "from-purple-500/20 to-pink-500/20",
                     logo: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffffff'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z'/%3E%3C/svg%3E"
                 },
                 {
-                    name: "MongoDB",
-                    color: "from-green-600/20 to-green-500/20",
-                    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg"
+                    name: "Temporal",
+                    color: "from-purple-600/20 to-blue-500/20",
+                    logo: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffffff'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z'/%3E%3C/svg%3E"
                 },
                 {
-                    name: "Redis",
-                    color: "from-red-600/20 to-red-400/20",
-                    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg"
+                    name: "OAuth 2.0",
+                    color: "from-green-500/20 to-blue-500/20",
+                    logo: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffffff'%3E%3Cpath d='M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z'/%3E%3C/svg%3E"
+                },
+                {
+                    name: "Socket.IO",
+                    color: "from-gray-700/20 to-white/20",
+                    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/socketio/socketio-original.svg"
                 }
             ]
         }

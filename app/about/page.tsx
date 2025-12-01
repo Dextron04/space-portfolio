@@ -91,9 +91,9 @@ const personalData = {
         "Astronomy & Space Exploration",
         "Hiking & Nature Photography",
         "Science Fiction Literature",
-        "Gaming",
-        "Socializing",
-        "Traveling",
+        "Gaming & Board Games",
+        "Socializing & Networking",
+        "Traveling & Cultural Exploration",
     ],
     photos: [
         {

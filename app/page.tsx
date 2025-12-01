@@ -124,7 +124,7 @@ export default function Portfolio() {
           <div className="relative w-full h-64 md:h-96 flex items-center justify-center">
             <ASCIIText text="Tushin" asciiFontSize={8} textFontSize={200} textColor="#fdf9f3" planeBaseHeight={5} enableWaves={false} />
           </div>
-          <h2 className="text-xl md:text-2xl text-gray-300">Software Developer & Space Enthusiast</h2>
+          <h2 className="text-xl md:text-2xl text-gray-300">Software Engineer | Backend & Cloud Developer</h2>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
             <Link href="/projects">
               <Button className="bg-purple-600 hover:bg-purple-700 text-white w-full sm:w-auto">
@@ -159,10 +159,10 @@ export default function Portfolio() {
           <div className="grid md:grid-cols-2 gap-10 items-center">
             <div className="space-y-4">
               <p className="text-gray-300">
-                Hey there! I&apos;m Tushin Kulshreshtha — a passionate Computer Science undergraduate based in San Francisco with a knack for building elegant, scalable, and secure web applications. My curiosity fuels my constant pursuit of innovative tech, whether that means designing RESTful APIs, engineering a custom file system, or crafting a remote monitoring iOS app for a Raspberry Pi cluster.
+                Hey there! I&apos;m Tushin Kulshreshtha — a passionate Computer Science undergraduate based in San Francisco with a knack for building elegant, scalable, and secure web applications. With 4+ years of experience, I specialize in full-stack development, cloud infrastructure, and AI/ML integration.
               </p>
               <p className="text-gray-300">
-                From full-stack engineering internships to AI-driven projects, I&apos;ve thrived in agile environments, delivering performance-optimised, user-friendly solutions. My journey spans Django, React, Spring Boot, AWS, Caddy, Docker, and more. Outside the code, I enjoy stargazing and solving tough problems—be it in tech or a good board game!
+                From engineering Docker-based microservices that reduced deployment time by 40% to architecting hybrid recommendation systems with 95% accuracy, I&apos;ve thrived in agile environments delivering performance-optimized solutions. My journey spans React, Spring Boot, Django, AWS, Docker, and more. Currently, I&apos;m making an impact as a Software Engineer Intern at SellWizr and serving as Head VP Assistant at SFSU, where I&apos;ve managed over $500,000 in university funding allocations.
               </p>
             </div>
             <div className="bg-gradient-to-br from-indigo-900/30 to-purple-900/30 p-6 rounded-lg border border-purple-800/30 backdrop-blur-sm">
@@ -172,25 +172,25 @@ export default function Portfolio() {
                   <span className="mr-2">•</span> Based in San Francisco, California
                 </li>
                 <li className="flex items-start">
-                  <span className="mr-2">•</span> B.S. in Computer Science, GPA 3.95 (SFSU, 2021–2025)
+                  <span className="mr-2">•</span> B.S. in Computer Science, GPA 3.95 (SFSU, Dec 2025)
                 </li>
                 <li className="flex items-start">
-                  <span className="mr-2">•</span> Proficient in Python, JavaScript, C++, Java, Spring Boot
+                  <span className="mr-2">•</span> Phi Beta Kappa Honor Society & Dean&apos;s List (All Semesters)
                 </li>
                 <li className="flex items-start">
-                  <span className="mr-2">•</span> Web stack: React, Next.js, Node.js, Django, REST APIs
+                  <span className="mr-2">•</span> 4+ years experience in Full-Stack & Cloud Development
                 </li>
                 <li className="flex items-start">
-                  <span className="mr-2">•</span> Cloud-native: AWS (EC2, Lambda, S3), Docker, Caddy
+                  <span className="mr-2">•</span> Advanced in Python, Java, JavaScript, React, Node.js
                 </li>
                 <li className="flex items-start">
-                  <span className="mr-2">•</span> Built real-time server dashboards and serverless pipelines
+                  <span className="mr-2">•</span> Cloud expertise: AWS (EC2, S3, Lambda, EKS), Docker
                 </li>
                 <li className="flex items-start">
-                  <span className="mr-2">•</span> Current AI Intern @ MeetX; enhancing hybrid recommender systems
+                  <span className="mr-2">•</span> 98% code coverage with test-driven development practices
                 </li>
                 <li className="flex items-start">
-                  <span className="mr-2">•</span> Loves automation, system optimization, and efficient design
+                  <span className="mr-2">•</span> Reduced deployment time by 40% & security vulnerabilities by 85%
                 </li>
               </ul>
             </div>
