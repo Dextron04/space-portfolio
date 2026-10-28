@@ -6,7 +6,9 @@ import { ChevronDown, Github, Linkedin, Moon, Star } from "lucide-react"
 import Link from "next/link"
 
 import { Button } from "@/components/ui/button"
+import { Card } from "@/components/ui/card"
 import ASCIIText from "@/components/ASCIIText"
+import ContactForm from "@/components/ContactForm"
 import SkillsSection from "@/components/SkillsSection"
 
 type Star = {
@@ -99,6 +101,9 @@ export default function Portfolio() {
             </Link>
             <Link href="#skills" className="hover:text-purple-300 transition-colors">
               Skills
+            </Link>
+            <Link href="#contact" className="hover:text-purple-300 transition-colors">
+              Contact
             </Link>
           </div>
           <div className="flex gap-4">
@@ -194,6 +199,37 @@ export default function Portfolio() {
 
         {/* Skills Section */}
         <SkillsSection />
+
+        {/* Contact Section */}
+        <section id="contact" className="relative z-10 py-20">
+          <h2 className="text-3xl md:text-4xl font-bold mb-12 flex items-center">
+            <Star className="mr-2 text-purple-400" /> Get In Touch
+          </h2>
+          <Card className="bg-slate-900/60 border-purple-900/50 backdrop-blur-sm p-6 md:p-8">
+            <div className="text-center max-w-2xl mx-auto">
+              <h3 className="text-2xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-300 to-blue-400">
+                Let&apos;s Connect!
+              </h3>
+              <p className="text-gray-300 mb-8">
+                Whether you want to discuss a project, ask a question, or just say hi,
+                feel free to reach out to me through any of these platforms.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+                <Link href="https://github.com/Dextron04" target="_blank" rel="noopener noreferrer">
+                  <Button className="bg-purple-600 hover:bg-purple-700 w-full sm:w-auto">
+                    <Github className="h-5 w-5 mr-2" /> GitHub
+                  </Button>
+                </Link>
+                <Link href="https://www.linkedin.com/in/tushin-kulshreshtha-2522b8231/" target="_blank" rel="noopener noreferrer">
+                  <Button variant="outline" className="border-purple-600 text-purple-300 hover:bg-purple-600/20 w-full sm:w-auto">
+                    <Linkedin className="h-5 w-5 mr-2" /> LinkedIn
+                  </Button>
+                </Link>
+              </div>
+              <ContactForm />
+            </div>
+          </Card>
+        </section>
       </main>
 
       {/* Footer */}
@@ -206,6 +242,7 @@ export default function Portfolio() {
             <Link href="/about" className="hover:text-purple-300 transition-colors">About</Link>
             <Link href="/projects" className="hover:text-purple-300 transition-colors">Projects</Link>
             <Link href="#skills" className="hover:text-purple-300 transition-colors">Skills</Link>
+            <Link href="#contact" className="hover:text-purple-300 transition-colors">Contact</Link>
           </div>
         </div>
       </footer>
