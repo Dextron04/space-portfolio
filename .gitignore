@@ -41,3 +41,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+Tushin_Resume_Updated*.pdf
+resume-ref.pdf

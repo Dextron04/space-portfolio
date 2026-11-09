@@ -1,252 +1,187 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { motion } from "framer-motion"
-import { ChevronDown, Github, Linkedin, Moon, Star } from "lucide-react"
+import Image from "next/image"
 import Link from "next/link"
+import { motion } from "framer-motion"
+import { ArrowDown, Github, Linkedin, Mail } from "lucide-react"
 
-import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
-import ASCIIText from "@/components/ASCIIText"
-import ContactForm from "@/components/ContactForm"
-import SkillsSection from "@/components/SkillsSection"
+import ProjectGrid from "@/components/ProjectGrid"
+import MacClassic from "@/components/MacClassic"
+import Reveal from "@/components/Reveal"
+import ScrambleText from "@/components/ScrambleText"
+import Stats from "@/components/Stats"
+import SectionHead from "@/components/SectionHead"
+import { useProjects } from "@/lib/useProjects"
+import { FACTS, LINKS, SKILLS } from "@/lib/profile"
 
-type Star = {
-  width: string;
-  height: string;
-  top: string;
-  left: string;
-  duration: number;
-};
+const EASE = [0.2, 0, 0, 1] as const
+const rise = (i: number) => ({
+  initial: { opacity: 0, y: 14 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.5, ease: EASE, delay: 0.1 + i * 0.08 },
+})
 
-export default function Portfolio() {
-  const [stars, setStars] = useState<Star[]>([])
-
-  useEffect(() => {
-    setStars(
-      [...Array(100)].map(() => ({
-        width: Math.random() * 3 + 1 + "px",
-        height: Math.random() * 3 + 1 + "px",
-        top: Math.random() * 100 + "%",
-        left: Math.random() * 100 + "%",
-        duration: Math.random() * 5 + 3,
-      }))
-    )
-  }, [])
+export default function Home() {
+  const projects = useProjects()
+  const featured = projects?.filter((p) => p.featured) ?? []
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-b from-black via-slate-900 to-indigo-950 text-white overflow-hidden">
-      {/* Stars background */}
-      <div className="absolute inset-0 z-0">
-        {stars.map((star, i) => (
-          <motion.div
-            key={i}
-            className="absolute rounded-full bg-white"
-            style={{
-              width: star.width,
-              height: star.height,
-              top: star.top,
-              left: star.left,
-            }}
-            animate={{
-              opacity: [0.2, 0.8, 0.2],
-            }}
-            transition={{
-              duration: star.duration,
-              repeat: Number.POSITIVE_INFINITY,
-              ease: "easeInOut",
-            }}
-          />
-        ))}
-      </div>
-
-      {/* Floating planets */}
-      <motion.div
-        className="absolute top-1/4 right-1/4 w-32 h-32 rounded-full bg-gradient-to-br from-purple-500 to-purple-900 opacity-30"
-        animate={{
-          y: [0, 10, 0],
-          rotate: 360,
-        }}
-        transition={{
-          y: { duration: 8, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" },
-          rotate: { duration: 60, repeat: Number.POSITIVE_INFINITY, ease: "linear" },
-        }}
-      />
-
-      <motion.div
-        className="absolute bottom-1/3 left-1/5 w-20 h-20 rounded-full bg-gradient-to-br from-blue-400 to-blue-800 opacity-20"
-        animate={{
-          y: [0, -15, 0],
-          rotate: 360,
-        }}
-        transition={{
-          y: { duration: 10, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" },
-          rotate: { duration: 40, repeat: Number.POSITIVE_INFINITY, ease: "linear" },
-        }}
-      />
-
-      {/* Header */}
-      <header className="relative z-10 flex flex-col items-center justify-center min-h-screen">
-        <nav className="fixed top-0 left-0 right-0 p-4 md:p-6 flex justify-between items-center bg-black/20 backdrop-blur-sm border-b border-purple-900/30">
-          <div className="flex items-center gap-2">
-            <Moon className="text-purple-400 h-5 w-5" />
-            <span className="font-bold text-xl bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-300 to-blue-400">Portfolio</span>
-          </div>
-          <div className="hidden md:flex gap-6">
-            <Link href="/about" className="hover:text-purple-300 transition-colors">
-              About
-            </Link>
-            <Link href="/projects" className="hover:text-purple-300 transition-colors">
-              Projects
-            </Link>
-            <Link href="#skills" className="hover:text-purple-300 transition-colors">
-              Skills
-            </Link>
-            <Link href="#contact" className="hover:text-purple-300 transition-colors">
-              Contact
-            </Link>
-          </div>
-          <div className="flex gap-4">
-            <Link href="https://github.com/Dextron04" target="_blank" rel="noopener noreferrer">
-              <Button variant="ghost" size="icon" className="text-purple-300 hover:text-purple-200">
-                <Github className="h-5 w-5" />
-              </Button>
-            </Link>
-            <Link href="https://www.linkedin.com/in/tushin-kulshreshtha-2522b8231/" target="_blank" rel="noopener noreferrer">
-              <Button variant="ghost" size="icon" className="text-purple-300 hover:text-purple-200">
-                <Linkedin className="h-5 w-5" />
-              </Button>
-            </Link>
-          </div>
-        </nav>
-
-        <div className="text-center px-4 space-y-6">
-          <div className="relative w-full h-64 md:h-96 flex items-center justify-center">
-            <ASCIIText text="Tushin" asciiFontSize={8} textFontSize={200} textColor="#fdf9f3" planeBaseHeight={5} enableWaves={false} />
-          </div>
-          <h2 className="text-xl md:text-2xl text-gray-300">Software Engineer | Backend & Cloud Developer</h2>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
-            <Link href="/projects">
-              <Button className="bg-purple-600 hover:bg-purple-700 text-white w-full sm:w-auto">
-                View My Work
-              </Button>
-            </Link>
-            <Link href="/about">
-              <Button variant="outline" className="border-purple-600 text-purple-300 hover:bg-purple-600/20 w-full sm:w-auto">
-                About Me
-              </Button>
-            </Link>
-          </div>
+    <div className="mx-auto max-w-6xl px-5">
+      {/* hero */}
+      <section className="grid min-h-[calc(100vh-3.5rem)] items-center gap-12 py-16 lg:grid-cols-[1.4fr_1fr]">
+        <div>
+          <motion.p {...rise(0)} className="mb-6 font-mono text-dim">
+            <span className="text-accent">$</span> whoami
+          </motion.p>
+          <h1 className="font-sans font-medium tracking-tight text-[clamp(2.75rem,8.5vw,6.75rem)] leading-[0.88] tracking-tight">
+            <ScrambleText text="Tushin" delay={250} />
+            <br />
+            <em className="not-italic text-faint">
+              <ScrambleText text="Kulshreshtha" delay={500} />
+            </em>
+          </h1>
+          <motion.p {...rise(3)} className="mt-8 max-w-xl text-base text-dim md:text-lg">
+            Software engineer. I build secure, scalable backend, cloud and ML systems — and care a lot about clean
+            architecture.
+          </motion.p>
+          <motion.div {...rise(4)} className="mt-10 flex flex-wrap gap-3">
+            <Link href="/projects" className="btn btn-solid">view work →</Link>
+            <a href={LINKS.resume} download className="btn">resume ↓</a>
+            <Link href="/about" className="btn">about</Link>
+          </motion.div>
         </div>
 
-        <motion.div
-          className="absolute bottom-10 cursor-pointer"
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
-          onClick={() => document.getElementById('featured')?.scrollIntoView({ behavior: 'smooth' })}
-        >
-          <ChevronDown className="h-8 w-8 text-purple-300" />
+        <motion.div {...rise(5)} className="relative">
+          <MacClassic />
         </motion.div>
-      </header>
 
-      {/* Main content */}
-      <main className="relative z-10 max-w-7xl mx-auto px-4 py-12 pb-24 md:pb-12">
-        {/* About Section */}
-        <section id="about" className="relative z-10 py-20">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 flex items-center">
-            <Star className="mr-2 text-purple-400" /> About Me
-          </h2>
-          <div className="grid md:grid-cols-2 gap-10 items-center">
-            <div className="space-y-4">
-              <p className="text-gray-300">
-                Hey there! I&apos;m Tushin Kulshreshtha — a passionate Computer Science undergraduate based in San Francisco with a knack for building elegant, scalable, and secure web applications. With 4+ years of experience, I specialize in full-stack development, cloud infrastructure, and AI/ML integration.
-              </p>
-              <p className="text-gray-300">
-                From engineering Docker-based microservices that reduced deployment time by 40% to architecting hybrid recommendation systems with 95% accuracy, I&apos;ve thrived in agile environments delivering performance-optimized solutions. My journey spans React, Spring Boot, Django, AWS, Docker, and more. Currently, I&apos;m making an impact as a Software Engineer Intern at SellWizr and serving as Head VP Assistant at SFSU, where I&apos;ve managed over $500,000 in university funding allocations.
-              </p>
-            </div>
-            <div className="bg-gradient-to-br from-indigo-900/30 to-purple-900/30 p-6 rounded-lg border border-purple-800/30 backdrop-blur-sm">
-              <h3 className="text-xl font-semibold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300">Quick Facts</h3>
-              <ul className="space-y-2 text-gray-300">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span> Based in San Francisco, California
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span> B.S. in Computer Science, GPA 3.95 (SFSU, Dec 2025)
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span> Phi Beta Kappa Honor Society & Dean&apos;s List (All Semesters)
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span> 4+ years experience in Full-Stack & Cloud Development
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span> Advanced in Python, Java, JavaScript, React, Node.js
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span> Cloud expertise: AWS (EC2, S3, Lambda, EKS), Docker
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span> 98% code coverage with test-driven development practices
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span> Reduced deployment time by 40% & security vulnerabilities by 85%
-                </li>
-              </ul>
-            </div>
+        <a href="#about" aria-label="Scroll to about" className="hidden items-center gap-2 text-faint transition-colors hover:text-fg lg:flex lg:col-span-2">
+          <ArrowDown size={14} className="animate-bounce" /> scroll
+        </a>
+      </section>
+
+      {/* about */}
+      <section id="about" className="scroll-mt-20 py-24">
+        <SectionHead n="01" path="~/about" title="Numbers, not adjectives" />
+        <div className="grid gap-12 lg:grid-cols-2">
+          <Reveal className="space-y-4 text-dim">
+            <p>
+              Software engineer in San Francisco who likes owning a system end to end — backend services, cloud
+              infrastructure, ML, and the automation that ties them together. Four-plus years across startups and
+              enterprise teams, in Python, Java, JavaScript and C.
+            </p>
+            <p>
+              I&apos;ve shipped Docker microservices on AWS, secure REST APIs and auth, and recommenders serving 50K+
+              users, and I&apos;m CTO and co-founder of Newtonite. Right now I&apos;m at US Neuro, automating
+              case workflows with Azure and AI.
+            </p>
+            <Link href="/about" className="inline-block text-accent underline underline-offset-4">
+              full story →
+            </Link>
+          </Reveal>
+          <Reveal delay={0.08}>
+<div className="border border-line bg-surface/70 backdrop-blur-sm">
+          <div className="flex items-center gap-2 border-b border-line px-4 py-2.5">
+            <span className="h-2 w-2 rounded-full bg-faint" />
+            <span className="h-2 w-2 rounded-full bg-faint" />
+            <span className="h-2 w-2 rounded-full bg-accent" />
+            <span className="label ml-2">~/profile.json</span>
           </div>
-        </section>
-
-        {/* Skills Section */}
-        <SkillsSection />
-
-        {/* Contact Section */}
-        <section id="contact" className="relative z-10 py-20">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 flex items-center">
-            <Star className="mr-2 text-purple-400" /> Get In Touch
-          </h2>
-          <Card className="bg-slate-900/60 border-purple-900/50 backdrop-blur-sm p-6 md:p-8">
-            <div className="text-center max-w-2xl mx-auto">
-              <h3 className="text-2xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-300 to-blue-400">
-                Let&apos;s Connect!
-              </h3>
-              <p className="text-gray-300 mb-8">
-                Whether you want to discuss a project, ask a question, or just say hi,
-                feel free to reach out to me through any of these platforms.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-                <Link href="https://github.com/Dextron04" target="_blank" rel="noopener noreferrer">
-                  <Button className="bg-purple-600 hover:bg-purple-700 w-full sm:w-auto">
-                    <Github className="h-5 w-5 mr-2" /> GitHub
-                  </Button>
-                </Link>
-                <Link href="https://www.linkedin.com/in/tushin-kulshreshtha-2522b8231/" target="_blank" rel="noopener noreferrer">
-                  <Button variant="outline" className="border-purple-600 text-purple-300 hover:bg-purple-600/20 w-full sm:w-auto">
-                    <Linkedin className="h-5 w-5 mr-2" /> LinkedIn
-                  </Button>
-                </Link>
+          <dl className="space-y-3 p-5 font-mono text-[13px]">
+            {FACTS.map(([k, v]) => (
+              <div key={k} className="grid grid-cols-[5.5rem_1fr] gap-3">
+                <dt className="text-faint">{k}</dt>
+                <dd className="text-fg">{v}</dd>
               </div>
-              <ContactForm />
-            </div>
-          </Card>
-        </section>
-      </main>
-
-      {/* Footer */}
-      <footer className="relative z-10 py-8 border-t border-purple-900/30">
-        <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="text-gray-400 text-sm text-center md:text-left">
-            © {new Date().getFullYear()} Tushin Kulshreshtha. All rights reserved.
-          </div>
-          <div className="flex gap-6 text-gray-400">
-            <Link href="/about" className="hover:text-purple-300 transition-colors">About</Link>
-            <Link href="/projects" className="hover:text-purple-300 transition-colors">Projects</Link>
-            <Link href="#skills" className="hover:text-purple-300 transition-colors">Skills</Link>
-            <Link href="#contact" className="hover:text-purple-300 transition-colors">Contact</Link>
-          </div>
+            ))}
+          </dl>
         </div>
-      </footer>
+          </Reveal>
+        </div>
+        <div className="mt-16">
+          <Stats />
+        </div>
+      </section>
+
+      {/* newtonite spotlight */}
+      <section id="newtonite" className="scroll-mt-20 py-24">
+        <SectionHead n="02" path="~/newtonite" title="Co-founder & CTO" />
+        <Reveal className="grid overflow-hidden border border-line bg-surface/60 md:grid-cols-[minmax(220px,300px)_1fr]">
+          <div className="flex items-center justify-center border-b border-line bg-black p-8 md:border-b-0 md:border-r">
+            <Image src="/newtonite.svg" alt="Newtonite logo: a serif N with a small atom" width={240} height={240} unoptimized className="h-auto w-full max-w-[240px]" />
+          </div>
+          <div className="flex flex-col p-6 md:p-10">
+            <p className="label">cto &amp; co-founder · ongoing</p>
+            <h3 className="mt-3 text-4xl font-medium tracking-tight md:text-5xl">Newtonite</h3>
+            <p className="mt-5 max-w-xl text-dim">
+              I&apos;m the technical lead of a company I co-founded: the person who decides how the product is built and
+              then builds it. The balance I care about is product requirements against engineering trade-offs and
+              long-term system evolution.
+            </p>
+            <dl className="mt-8 divide-y divide-line border-y border-line font-mono text-[13px]">
+              {[
+                ["architecture", "Primary architecture and product foundation across AWS and Firebase"],
+                ["systems", "Service boundaries, data flows and deployment strategy"],
+                ["ownership", "Technical direction, from architecture through implementation"],
+              ].map(([k, v]) => (
+                <div key={k} className="grid gap-1 py-3 sm:grid-cols-[8rem_1fr] sm:gap-4">
+                  <dt className="text-faint">{k}</dt>
+                  <dd className="text-fg/90">{v}</dd>
+                </div>
+              ))}
+            </dl>
+            <div className="mt-6 flex flex-wrap gap-2">
+              {["AWS", "Firebase", "system architecture", "product engineering"].map((t) => (
+                <span key={t} className="chip">{t}</span>
+              ))}
+            </div>
+          </div>
+        </Reveal>
+      </section>
+
+      {/* skills */}
+      <section id="skills" className="scroll-mt-20 py-24">
+        <SectionHead n="03" path="~/skills" title="Toolbox" />
+        <div className="border-t border-line">
+          {Object.entries(SKILLS).map(([cat, items], i) => (
+            <Reveal key={cat} delay={i * 0.05} className="grid gap-3 border-b border-line py-5 md:grid-cols-[12rem_1fr]">
+              <span className="text-faint">
+                <span className="text-accent">$</span> ls {cat}/
+              </span>
+              <div className="flex flex-wrap gap-2">
+                {items.map((s) => (
+                  <span key={s} className="chip text-fg/90">{s}</span>
+                ))}
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      {/* work */}
+      <section id="work" className="scroll-mt-20 py-24">
+        <SectionHead n="04" path="~/projects --featured" title="Selected work" />
+        {projects?.length === 0 ? (
+          <p className="text-dim">
+            Couldn&apos;t reach GitHub right now. Browse on{" "}
+            <a href={LINKS.github} className="text-accent underline underline-offset-4">github.com/Dextron04</a>.
+          </p>
+        ) : (
+          <ProjectGrid projects={projects && featured} skeletons={5} />
+        )}
+        <Link href="/projects" className="btn mt-8">all projects →</Link>
+      </section>
+
+      {/* contact */}
+      <section id="contact" className="scroll-mt-20 py-24">
+        <SectionHead n="05" path="~/contact" title="Let's build something" />
+        <Reveal className="flex flex-wrap gap-3">
+          <a href={LINKS.github} target="_blank" rel="noopener noreferrer" className="btn"><Github size={15} /> github</a>
+          <a href={LINKS.linkedin} target="_blank" rel="noopener noreferrer" className="btn"><Linkedin size={15} /> linkedin</a>
+          <a href={LINKS.email} className="btn"><Mail size={15} /> email</a>
+          <a href={LINKS.resume} download className="btn btn-solid">resume ↓</a>
+        </Reveal>
+      </section>
     </div>
   )
 }
-
