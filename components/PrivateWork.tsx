@@ -6,7 +6,7 @@ export default function PrivateWork() {
   return (
     <div className="grid gap-px overflow-hidden rounded-lg border border-line bg-line md:grid-cols-2">
       {PRIVATE_WORK.map((w, i) => (
-        <Reveal key={w.name} delay={(i % 2) * 0.06} className="bg-bg">
+        <Reveal key={w.name} delay={(i % 2) * 0.06} className={`bg-bg ${PRIVATE_WORK.length % 2 && i === PRIVATE_WORK.length - 1 ? "md:col-span-2" : ""}`}>
           <article className="flex h-full flex-col gap-3 p-5">
             <div className="flex items-start justify-between gap-3">
               <h3 className="font-sans text-lg font-medium tracking-tight">{w.name}</h3>

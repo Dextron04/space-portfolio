@@ -8,10 +8,10 @@ const GITHUB_USERNAME = "Dextron04"
 export const FEATURED_PROJECT_IDS = [
   1081600376, // dex_bridge
   1429000124, // newtonite-swipe
-  1039740955, // resume-agent
+  1368708279, // auto-reel-creation
   960726721, // SafeWalk
   1042979752, // ConnectX-Mobile
-  1368708279, // auto-reel-creation
+  817924934, // File-System-Project
 ]
 
 // short blurbs shown on cards; used when a repo has no GitHub description of its own
