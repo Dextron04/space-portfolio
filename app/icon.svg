@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+<title>TK</title>
+<style>
+.l{fill:none;stroke:#f5f5f7;stroke-width:5.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:0;animation-duration:4.6s;animation-iteration-count:infinite;animation-timing-function:cubic-bezier(.2,0,0,1)}
+#tb{animation-name:tb}#ts{animation-name:ts}#ks{animation-name:ks}#ka{animation-name:ka}#kb{animation-name:kb}
+#c{fill:#f5f5f7;animation:cur 4.6s steps(1,end) infinite}
+#g{transform-box:fill-box;transform-origin:center;animation:pop 4.6s cubic-bezier(.2,0,0,1) infinite}
+@keyframes tb{0%,3.26%{stroke-dashoffset:1;opacity:1}13.04%{stroke-dashoffset:0}92%{stroke-dashoffset:0;opacity:1}98%,100%{stroke-dashoffset:0;opacity:0}}
+@keyframes ts{0%,10.87%{stroke-dashoffset:1;opacity:1}19.57%{stroke-dashoffset:0}92%{stroke-dashoffset:0;opacity:1}98%,100%{stroke-dashoffset:0;opacity:0}}
+@keyframes ks{0%,20.65%{stroke-dashoffset:1;opacity:1}29.35%{stroke-dashoffset:0}92%{stroke-dashoffset:0;opacity:1}98%,100%{stroke-dashoffset:0;opacity:0}}
+@keyframes ka{0%,28.26%{stroke-dashoffset:1;opacity:1}35.87%{stroke-dashoffset:0}92%{stroke-dashoffset:0;opacity:1}98%,100%{stroke-dashoffset:0;opacity:0}}
+@keyframes kb{0%,33.70%{stroke-dashoffset:1;opacity:1}41.30%{stroke-dashoffset:0}92%{stroke-dashoffset:0;opacity:1}98%,100%{stroke-dashoffset:0;opacity:0}}
+@keyframes cur{0%,40%{opacity:0}41%{opacity:1}48%{opacity:0}55%{opacity:1}62%{opacity:0}69%{opacity:1}76%{opacity:0}83%{opacity:1}92%{opacity:1}98%,100%{opacity:0}}
+@keyframes pop{0%,34%{transform:scale(1)}38%{transform:scale(1.07)}46%,100%{transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){.l,#c,#g{animation:none;opacity:1}}
+</style>
+<rect width="64" height="64" rx="14" fill="#0a0b0d"/>
+<rect x=".75" y=".75" width="62.5" height="62.5" rx="13.25" fill="none" stroke="#2a2d32" stroke-width="1.5"/>
+<g id="g">
+<path id="tb" class="l" pathLength="1" d="M8 19H26"/>
+<path id="ts" class="l" pathLength="1" d="M17 19V47"/>
+<path id="ks" class="l" pathLength="1" d="M35 19V47"/>
+<path id="ka" class="l" pathLength="1" d="M35 34L47 19"/>
+<path id="kb" class="l" pathLength="1" d="M39 30.5L48 47"/>
+</g>
+<rect id="c" x="52" y="41" width="5" height="6" rx="1"/>
+</svg>
