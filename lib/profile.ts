@@ -154,3 +154,17 @@ export const PHOTOS = [
   { src: "/photos/IMG_7241.jpeg", title: "Half Moon Bay", date: "Jul 2022", note: "After dark." },
   { src: "/photos/hike.jpeg", title: "Just a good day", date: "Jul 2022", note: "On the trail." },
 ]
+
+// Big builds that live in private repos or under an employer. Shown as "private": no links, no code.
+export type PrivateWork = { name: string; kind: string; span: string; stack: string[]; note: string }
+
+export const PRIVATE_WORK: PrivateWork[] = [
+  { name: "Newtonite platform", kind: "startup · cto", span: "Apr 2026 – now", stack: ["TypeScript", "Kotlin", "AWS", "Firebase"], note: "Backend, candidate screening platform, landing page and an Android screen app. Architecture and deployment owned end to end." },
+  { name: "US Neuro case automation", kind: "employer · solo owner", span: "2025 – now", stack: ["Azure", "OCR", "Python"], note: "Position-statement prep cut from about an hour to 2–3 minutes; case volume scaled from ~10 to 100 a day." },
+  { name: "ConnectX server", kind: "personal · long-running", span: "Oct 2022 – Dec 2025", stack: ["Node.js", "TypeScript", "WebSockets"], note: "Real-time chat backend behind the public ConnectX-Mobile client. Three years of on-and-off iteration." },
+  { name: "Cluzar", kind: "product", span: "May – Aug 2026", stack: ["JavaScript", "HTML"], note: "Web app with its own backend and a separate landing page." },
+  { name: "Auto Reel Creation", kind: "automation", span: "Sep – Oct 2026", stack: ["n8n", "Remotion", "GitHub Actions"], note: "Automated pipeline that produces short video reels about AI developer tools." },
+  { name: "SellWizr CRM", kind: "internship", span: "Jun – Dec 2025", stack: ["Docker", "Temporal", "n8n"], note: "Enterprise CRM microservices (deploys 40% faster) and AI workflows, 98% test coverage." },
+  { name: "MeetMux recommender", kind: "contract", span: "Feb – Jun 2025", stack: ["TensorFlow", "PyTorch", "XGBoost"], note: "Hybrid recommender: 95% accuracy at 50K+ concurrent users." },
+  { name: "dex-pay", kind: "personal", span: "Jun – Sep 2025", stack: ["TypeScript"], note: "Payments experiment built over a summer." },
+]

@@ -11,6 +11,8 @@ import Toolbox from "@/components/Toolbox"
 import Reveal from "@/components/Reveal"
 import ScrambleText from "@/components/ScrambleText"
 import Stats from "@/components/Stats"
+import Contributions from "@/components/Contributions"
+import PrivateWork from "@/components/PrivateWork"
 import SectionHead from "@/components/SectionHead"
 import { FEATURED_PROJECT_IDS, useProjects } from "@/lib/useProjects"
 import { FACTS, LINKS } from "@/lib/profile"
@@ -162,9 +164,24 @@ export default function Home() {
         <Link href="/projects" className="btn mt-8">all projects →</Link>
       </section>
 
+      {/* activity */}
+      <section id="activity" className="scroll-mt-20 py-24">
+        <SectionHead n="05" path="~/activity" title="Commit history" />
+        <Reveal><Contributions /></Reveal>
+      </section>
+
+      {/* private work */}
+      <section id="private" className="scroll-mt-20 py-24">
+        <SectionHead n="06" path="~/private" title="Closed-source work" />
+        <p className="mb-8 max-w-2xl text-dim">
+          The bigger, longer builds don&apos;t live on my public GitHub. Listed here so they&apos;re not invisible; code and links are private.
+        </p>
+        <PrivateWork />
+      </section>
+
       {/* contact */}
       <section id="contact" className="scroll-mt-20 py-24">
-        <SectionHead n="05" path="~/contact" title="Let's build something" />
+        <SectionHead n="07" path="~/contact" title="Let's build something" />
         <Reveal className="flex flex-wrap gap-3">
           <a href={LINKS.github} target="_blank" rel="noopener noreferrer" className="btn"><Github size={15} /> github</a>
           <a href={LINKS.linkedin} target="_blank" rel="noopener noreferrer" className="btn"><Linkedin size={15} /> linkedin</a>
