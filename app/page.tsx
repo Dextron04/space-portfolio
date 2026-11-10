@@ -7,12 +7,13 @@ import { ArrowDown, Github, Linkedin, Mail } from "lucide-react"
 
 import ProjectGrid from "@/components/ProjectGrid"
 import MacClassic from "@/components/MacClassic"
+import Toolbox from "@/components/Toolbox"
 import Reveal from "@/components/Reveal"
 import ScrambleText from "@/components/ScrambleText"
 import Stats from "@/components/Stats"
 import SectionHead from "@/components/SectionHead"
 import { FEATURED_PROJECT_IDS, useProjects } from "@/lib/useProjects"
-import { FACTS, LINKS, SKILLS } from "@/lib/profile"
+import { FACTS, LINKS } from "@/lib/profile"
 
 const EASE = [0.2, 0, 0, 1] as const
 const rise = (i: number) => ({
@@ -58,7 +59,7 @@ export default function Home() {
         </motion.div>
 
         <a href="#about" aria-label="Scroll to about" className="hidden items-center gap-2 text-faint transition-colors hover:text-fg lg:flex lg:col-span-2">
-          <ArrowDown size={14} className="animate-bounce" /> scroll
+          <ArrowDown size={14} className="animate-nudge" /> scroll
         </a>
       </section>
 
@@ -144,20 +145,7 @@ export default function Home() {
       {/* skills */}
       <section id="skills" className="scroll-mt-20 py-24">
         <SectionHead n="03" path="~/skills" title="Toolbox" />
-        <div className="border-t border-line">
-          {Object.entries(SKILLS).map(([cat, items], i) => (
-            <Reveal key={cat} delay={i * 0.05} className="grid gap-3 border-b border-line py-5 md:grid-cols-[12rem_1fr]">
-              <span className="text-faint">
-                <span className="text-accent">$</span> ls {cat}/
-              </span>
-              <div className="flex flex-wrap gap-2">
-                {items.map((s) => (
-                  <span key={s} className="chip text-fg/90">{s}</span>
-                ))}
-              </div>
-            </Reveal>
-          ))}
-        </div>
+        <Toolbox />
       </section>
 
       {/* work */}

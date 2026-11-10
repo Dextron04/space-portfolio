@@ -101,3 +101,7 @@ body::before {
   html { scroll-behavior: auto; }
   .cursor { animation: none; }
 }
+
+.animate-nudge { animation: nudge 2.4s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
+@keyframes nudge { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
+@media (prefers-reduced-motion: reduce) { .animate-nudge { animation: none; } }
