@@ -11,7 +11,7 @@ export const FEATURED_PROJECT_IDS = [
   1039740955, // resume-agent
   960726721, // SafeWalk
   1042979752, // ConnectX-Mobile
-  817924934, // File-System-Project
+  1368708279, // auto-reel-creation
 ]
 
 // short blurbs shown on cards; used when a repo has no GitHub description of its own
