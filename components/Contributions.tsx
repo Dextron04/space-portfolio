@@ -19,7 +19,7 @@ let cache: Data | null = null
 const fmt = (d: string) =>
   new Date(d + "T00:00:00Z").toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric", year: "numeric", timeZone: "UTC" })
 
-// Snapshot from scripts/contributions.mjs (public + private + org repos); public calendar as fallback.
+// Live from /api/contributions (server token); falls back to the committed snapshot, then the public calendar.
 export default function Contributions() {
   const box = useRef<HTMLDivElement>(null)
   const inView = useInView(box, { once: true, margin: "0px 0px -20% 0px" })
@@ -31,8 +31,9 @@ export default function Contributions() {
   useEffect(() => {
     if (cache) return
     let live = true
-    fetch("/contributions.json")
+    fetch("/api/contributions")
       .then((r) => (r.ok ? r.json() : Promise.reject()))
+      .catch(() => fetch("/contributions.json").then((r) => (r.ok ? r.json() : Promise.reject())))
       .catch(() =>
         fetch(`https://github-contributions-api.jogruber.de/v4/${USER}?y=last`)
           .then((r) => (r.ok ? r.json() : Promise.reject()))
