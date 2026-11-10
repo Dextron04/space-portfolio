@@ -11,7 +11,7 @@ import Reveal from "@/components/Reveal"
 import ScrambleText from "@/components/ScrambleText"
 import Stats from "@/components/Stats"
 import SectionHead from "@/components/SectionHead"
-import { useProjects } from "@/lib/useProjects"
+import { FEATURED_PROJECT_IDS, useProjects } from "@/lib/useProjects"
 import { FACTS, LINKS, SKILLS } from "@/lib/profile"
 
 const EASE = [0.2, 0, 0, 1] as const
@@ -23,7 +23,9 @@ const rise = (i: number) => ({
 
 export default function Home() {
   const projects = useProjects()
-  const featured = projects?.filter((p) => p.featured) ?? []
+  const featured = (projects?.filter((p) => p.featured) ?? []).sort(
+    (a, b) => FEATURED_PROJECT_IDS.indexOf(a.id) - FEATURED_PROJECT_IDS.indexOf(b.id)
+  )
 
   return (
     <div className="mx-auto max-w-6xl px-5">
@@ -167,7 +169,7 @@ export default function Home() {
             <a href={LINKS.github} className="text-accent underline underline-offset-4">github.com/Dextron04</a>.
           </p>
         ) : (
-          <ProjectGrid projects={projects && featured} skeletons={5} />
+          <ProjectGrid projects={projects && featured} skeletons={6} />
         )}
         <Link href="/projects" className="btn mt-8">all projects →</Link>
       </section>
