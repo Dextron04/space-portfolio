@@ -30,10 +30,12 @@ export const STATS: Stat[] = [
 ]
 
 export const SKILLS: Record<string, string[]> = {
-  languages: ["Python", "Java", "JavaScript", "C", "C++"],
-  "frontend/backend": ["React", "React Native", "Next.js", "Node.js", "Spring Boot", "Django", "REST APIs"],
-  "databases/cloud": ["PostgreSQL", "MySQL", "MongoDB", "AWS", "Azure", "Firebase", "Docker"],
-  "tools/systems": ["Git", "Linux", "Temporal", "n8n", "OAuth 2.0", "JWT", "OWASP", "TensorFlow", "PyTorch"],
+  languages: ["Python", "TypeScript", "JavaScript", "Java", "C", "C++", "Swift", "Kotlin"],
+  "web/mobile": ["React", "Next.js", "React Native", "Node.js", "Express", "FastAPI", "Spring Boot", "Django", "SwiftUI"],
+  "ai/agents": ["Claude API", "MCP", "Qdrant", "n8n", "Temporal", "TensorFlow", "PyTorch", "XGBoost", "scikit-learn", "Whisper"],
+  "data/cloud": ["PostgreSQL", "MySQL", "MongoDB", "Firebase", "AWS", "Azure", "Docker"],
+  "realtime/security": ["REST APIs", "WebSockets", "WebRTC", "OAuth 2.0", "JWT", "OWASP"],
+  tools: ["Git", "GitHub Actions", "Linux", "Remotion"],
 }
 
 export const BIO = [
