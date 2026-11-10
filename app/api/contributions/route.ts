@@ -41,7 +41,8 @@ async function build(): Promise<Payload> {
   type R = { full_name: string; name: string; fork: boolean }
   const lists = await Promise.all([
     pages<R>("/user/repos?affiliation=owner&sort=pushed"),
-    ...ORGS.map((o) => pages<R>(`/orgs/${o}/repos`)),
+    // an org can refuse this token (policy or owner mismatch); skip it rather than failing the whole graph
+    ...ORGS.map((o) => pages<R>(`/orgs/${o}/repos`).catch(() => [] as R[])),
   ])
   const repos = lists.flat().filter((r) => !r.fork)
   const by: Record<string, Record<string, number>> = {}
