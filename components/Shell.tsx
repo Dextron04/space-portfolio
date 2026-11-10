@@ -6,6 +6,7 @@ import { useEffect } from "react"
 import { LayoutGroup, MotionConfig, motion } from "framer-motion"
 import { Github, Linkedin } from "lucide-react"
 import { LINKS } from "@/lib/profile"
+import AnimatedFavicon from "./AnimatedFavicon"
 
 const NAV = [
   { href: "/", label: "home" },
@@ -29,6 +30,7 @@ export default function Shell({ children }: { children: React.ReactNode }) {
 
   return (
     <MotionConfig reducedMotion="user">
+      <AnimatedFavicon />
       <div className="glow" aria-hidden />
       <header className="font-mono text-[13px] sticky top-0 z-40 border-b border-line bg-bg/80 backdrop-blur-md">
         <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-5">
