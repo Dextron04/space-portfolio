@@ -40,10 +40,6 @@ export default function Home() {
           </motion.p>
           <h1 className="font-sans font-medium tracking-tight text-[clamp(2.75rem,8.5vw,6.75rem)] leading-[0.88] tracking-tight">
             <ScrambleText text="Tushin" delay={250} />
-            <br />
-            <em className="not-italic text-faint">
-              <ScrambleText text="Kulshreshtha" delay={500} />
-            </em>
           </h1>
           <motion.p {...rise(3)} className="mt-8 max-w-xl text-base text-dim md:text-lg">
             Software engineer. I build secure, scalable backend, cloud and ML systems — and care a lot about clean
